@@ -1,0 +1,16 @@
+1.进入根目录 执行mvn clean package 将target下的cas.war发布到应用服务器
+2.环境要求 jdk8 tomcat8
+3.如果要支持http 修改HTTPSandIMAPS-10000001.json 中的
+
+{
+  "@class" : "org.apereo.cas.services.RegexRegisteredService",
+  "serviceId" : "^(https|http|imaps)://.*",
+  "name" : "HTTPS and IMAPS",
+  "id" : 10000001,
+  "description" : "This service definition authorizes all application urls that support HTTPS and IMAPS protocols.",
+  "evaluationOrder" : 10000
+}
+
+serviceId增加http
+
+4.cas支持多种校验模式，要修改模式修改 application.properties

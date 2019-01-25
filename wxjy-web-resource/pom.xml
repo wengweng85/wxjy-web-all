@@ -1,0 +1,54 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.insigma</groupId>
+    <packaging>jar</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>wxjy-web-resource</name>
+    <url>http://maven.apache.org</url>
+    <description>
+       修改名字为wabjars
+    </description>
+    <dependencies>
+       
+    </dependencies>
+    <build>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <targetPath>META-INF/resources/</targetPath>
+            </resource>
+        </resources>
+    </build>
+
+    <!-- 发布命令   mvn deploy -Dmaven.test.skip=true -->
+    <!-- nexus私服配置 -->
+    <repositories>
+        <repository>
+            <id>public</id>
+            <name>maven-public</name>
+            <url>http://115.233.221.133:58081/repository/maven-public/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
+    <!-- 发布命令   mvn deploy -Dmaven.test.skip=true -->
+    <distributionManagement>
+        <repository>
+            <id>maven-releases</id>
+            <name>maven-releases</name>
+            <url>http://115.233.221.133:58081/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>maven-snapshots</id>
+            <name>maven-snapshots</name>
+            <url>http://115.233.221.133:58081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+    <artifactId>wxjy-web-resource</artifactId>
+</project>

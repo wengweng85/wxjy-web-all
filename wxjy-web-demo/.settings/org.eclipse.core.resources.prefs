@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+encoding//src/main/java=GBK
+encoding//src/main/java/com/insigma/common/listener/ApplicationListener.java=UTF-8
+encoding//src/main/java/com/yinhai/sso/LocalCas20TicketValidationFilter.java=UTF-8
+encoding//src/main/resources=GBK
+encoding//src/main/resources/app.properties=UTF-8
+encoding//src/main/webapp/WEB-INF/page/login/login.ftl=UTF-8
+encoding//src/test/java=GBK
+encoding/<project>=GBK

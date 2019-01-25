@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	<description>== Shiro Components ==</description>
+	
+	<!-- 给予shior的内存缓存系统 ,这个是shiro的缓存服务-->
+    <!-- <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />  
+     --> 
+     
+	<!--  
+  		 配置 CacheManager. 
+    -->     
+    <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <property name="cacheManagerConfigFile" value="classpath:ehcache-shiro.xml"/> 
+    </bean>
+    
+   	<!-- redisManager -->
+	<bean id="redisManager" class="com.insigma.redis.RedisManager" />
+	
+    <!-- 安全管理器 -->    
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">  
+        <!-- 缓存管理器 -->
+        <property name="cacheManager" ref="cacheManager" />  
+		<!-- 验证 -->        
+        <property name="authenticator" ref="authenticator"/>
+        <!-- 多个验证策略 realmes -->
+        <property name="realms">
+        	<list>
+    			<!-- 这个认证，有一个先后的顺序 -->
+    			<ref bean="casRealm"/>
+    		</list>
+        </property>
+        <property name="subjectFactory" ref="casSubjectFactory"/>
+    </bean>  
+    
+    <!-- 会话Cookie模板 -->
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="sid"/>
+        <property name="httpOnly" value="true"/>
+        <property name="maxAge" value="-1"/>
+    </bean>
+    
+    <!-- 授权策略 -->
+    <bean id="authenticator" class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
+    	<property name="authenticationStrategy" >
+    		<!-- 所有Reaml都全部匹配的策略 -->
+    		<!-- <bean class="org.apache.shiro.authc.pam.AllSuccessfulStrategy"/> -->
+    		<bean class="org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy"/>
+    	</property>
+    </bean>
+    
+    <!-- 定义cas授权的Real,也是需要几层 -->
+    <bean id="casRealm" class="com.insigma.shiro.realm.MyCasRealm">
+		<!-- 认证通过后的默认角色 -->
+		<property name="defaultRoles" value="ROLE_USER" />
+		<!-- cas服务端地址前缀 -->
+		<property name="casServerUrlPrefix" value="${shiro.cas.serverUrlPrefix}" />
+		<!-- 应用服务地址，用来接收cas服务端票据 -->
+		<property name="casService" value="${shiro.cas.service}" />
+	</bean>
+	
+   	<!-- 登录过滤器 -->
+	<bean id="casFilter" class="org.apache.shiro.cas.CasFilter">
+		<!-- 配置验证错误时的失败页面 -->
+		<property name="failureUrl" value="${shiro.failureUrl}" />
+		<property name="successUrl" value="${shiro.successUrl}" />
+	</bean>
+
+	<!-- 登出过滤器 -->
+	<bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
+		<!-- 配置验证错误时的失败页面 -->
+		<property name="redirectUrl" value="${shiro.logoutUrl}" />
+	</bean>
+	
+	
+    <!-- Shior的过滤器配置 -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">  
+       <property name="securityManager" ref="securityManager" />
+         
+       <!-- 设定用户的登录链接，这里为cas登录页面的链接地址可配置回调地址 -->
+	   <property name="loginUrl" value="${shiro.loginUrl}" />
+		
+       <!-- 设定过滤器 -->
+       <property name="filters">
+			<map>
+				<!-- 添加casFilter到shiroFilter -->
+				<entry key="casFilter" value-ref="casFilter" />
+				<entry key="logoutFilter" value-ref="logoutFilter" />
+			</map>
+		</property>
+		
+		<property name="filterChainDefinitions">
+			<value> 
+				/=authc
+			    /index=authc
+			    /test/**=authc
+				/demo/**=anon
+				/common/**=authc
+				/excelconfig/**=authc
+				/sys/**=anon
+				/cas/login = casFilter
+				/cas/logout = logoutFilter
+			</value>
+		</property>
+   </bean> 
+   <bean id="casSubjectFactory" class="org.apache.shiro.cas.CasSubjectFactory"/>
+</beans>

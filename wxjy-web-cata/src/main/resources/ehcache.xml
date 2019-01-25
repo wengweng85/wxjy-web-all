@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+    <diskStore path="java.io.tmpdir" />
+    <defaultCache maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true" />
+    
+    <cache name="webcache" maxElementsInMemory="1" eternal="true"  
+        overflowToDisk="true" diskSpoolBufferSizeMB="10" maxElementsOnDisk="100000"  
+        diskPersistent="true" memoryStoreEvictionPolicy="LRU">
+        <BootstrapCacheLoaderFactory class="net.sf.ehcache.store.DiskStoreBootstrapCacheLoaderFactory" properties="bootstrapAsynchronously=true" />  
+    </cache>  
+    <!-- 
+    name：缓存名称
+    maxElementsInMemory：内存缓存中最多可以存放的元素数量。
+    eternal：缓存中对象是否永久有效,即是否永驻内存,true时将忽略timeToIdleSeconds和timeToLiveSeconds。
+    timeToLiveSeconds:缓存可以存活多少秒。
+    timeToIdleSeconds：多少秒未被访问会清除该缓存。
+    overflowToDisk：内存不足时,是否启用磁盘缓存，将缓存对象写到磁盘缓存中(需对象实现序列化接口)。
+    -->
+     <!-- 自定义缓存 -->
+    <cache name="baseCache" maxElementsInMemory="200"
+        maxElementsOnDisk="1000" eternal="false" overflowToDisk="true"
+        diskSpoolBufferSizeMB="20" timeToIdleSeconds="300" timeToLiveSeconds="600"
+        memoryStoreEvictionPolicy="LFU" />		
+        
+    <!-- token缓存，缓存时间为30分钟，可存放100000个元素 -->
+    <cache name="tokencache"
+		   eternal="false"
+		   maxElementsInMemory="100000"
+		   overflowToDisk="true"
+		   diskPersistent="false"
+		   timeToIdleSeconds="1800"
+		   timeToLiveSeconds="1800"
+		   memoryStoreEvictionPolicy="LFU"/>
+      
+</ehcache>
