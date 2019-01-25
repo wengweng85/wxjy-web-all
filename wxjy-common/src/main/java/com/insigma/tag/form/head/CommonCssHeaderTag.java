@@ -35,7 +35,7 @@ public class CommonCssHeaderTag implements Tag {
         String staticPath=contextpath;
         //æ≤Ã¨µÿ÷∑nginx
         String website_static_resource_nginx_url = AppConfig.getProperties("website_static_resource_nginx_url");
-        if (null != website_static_resource_nginx_url || !website_static_resource_nginx_url.equals("")) {
+        if (null != website_static_resource_nginx_url&& !website_static_resource_nginx_url.equals("")) {
             staticPath = website_static_resource_nginx_url;
         }
         StringBuffer sb = new StringBuffer();
