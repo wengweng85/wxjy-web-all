@@ -26,7 +26,6 @@
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
                     </a>
-                    <a class="btn btn-info"  onclick="logout()"><i class="fa fa-search"></i>&nbsp;退出</a>
                 </div>
             </div>
             <div class="ibox-content">
@@ -362,11 +361,6 @@
    	    }
     }
     
-    
-    function logout(){
-    	rc. remove_token();
-    	window.location.href=contextPath;
-    }
     </script>
 </body>
 </html>

@@ -26,7 +26,9 @@
 	<bean id="modulesMap" class="java.util.HashMap">
 		<constructor-arg>
 			<map>
-				<entry key="homeModule" value="/sxjy-web/" />
+				<entry key="homeModule" value="/wxjy-web-demo/" />
+				<entry key="website_static_resource_url" value="${website_static_resource_nginx_url}" />
+				<entry key="gateway_base_url" value="${gateway_base_url}" />
 			</map>
 		</constructor-arg>
 	</bean>

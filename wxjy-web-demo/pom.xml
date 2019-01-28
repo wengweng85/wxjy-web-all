@@ -16,7 +16,6 @@
     <properties>
         <thymeleaf.version>3.0.6.RELEASE</thymeleaf.version>
     </properties>
-    
     <dependencies>
         <!--自定义jar包 -->
         <dependency>

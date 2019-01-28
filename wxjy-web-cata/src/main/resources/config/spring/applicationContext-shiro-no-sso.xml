@@ -23,12 +23,7 @@
 		<!-- Shiro过滤链的定义 -->
 		<property name="filterChainDefinitions">
 			<value>
-				/=authc
-			    /index=authc
-				/demo/**=authc
-				/common/**=authc
-				/excelconfig/**=authc
-				/sys/**=authc
+				/**=anon
 			</value>
 		</property>
 	</bean>

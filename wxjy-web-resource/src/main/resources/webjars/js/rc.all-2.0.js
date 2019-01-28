@@ -338,8 +338,9 @@ var rc = {
 	 * @param {} async
 	 * @param {} istokenreload
 	 */
-	$ajax:function(url,param,callback,setting_in){
+	$ajax:function(url,param,callback,setting_in,error_callback){
 		console.debug(url);
+		console.debug(localStorage.getItem('token'));
 		//console.debug(param);
 		var default_setting={
 			method:'post',
@@ -357,7 +358,7 @@ var rc = {
 		var options={};
 		options.headers={
 			'RequestVerificationToken':$("#CSRFToken").val(),
-			'Authorization':localStorage.getItem('token')
+			'Authorization':'Bearer '+localStorage.getItem('token')
 		},
 		options.type=setting.method;
 		options.cache = false;
@@ -385,40 +386,31 @@ var rc = {
 		options.success=function(response,textStatus){
 			try{
 				console.debug(response);
-				//session超时
-				/*if(response.obj&&response.obj.statuscode=='session_expired'){
-					layer.open({
-	        			content : '没有登录或登录超时,请重新登录！',
-	        			closeBtn : 0,
-	        			yes : function(index, layero){
-	        				window.location.href=contextPath+response.obj.redirecturl;
-	        			}
-	        		});
-				}else if(response.obj&&response.obj.statuscode=='unauthorized'){
-					layer.open({
-	        			content : '您没有足够的权限执行该操作!',
-	        			closeBtn : 0,
-	        			yes : function(index, layero){
-	        				window.location.href=contextPath+response.obj.redirecturl;
-	        			}
-	        		});
-				}else */
-				if(response.obj&&response.obj.statuscode=='sqlinject'){
-					alert('请求中存在sql注入关键字,属于非法请求,请确认参数中是否有 \" \' * % < > & 等字符');
-					//rc.hideMask();
-				}else if(response.obj&&response.obj.statuscode=='resubmit'){
-					alert('请勿重复提交数据');
-					//rc.hideMask();
-				}
-				else{
-				    //rc.ajax_success(response);
-					//自定义成功回调函数
-					if(callback){
-						callback(response);
+				if(response.syscode==200){
+					if(response.success==true){
+						if(response.obj&&response.obj.token){
+							localStorage.setItem('token',response.obj.token);
+						}
+						//自定义成功回调函数
+						if(callback){
+							callback(response);
+						}else{
+							layer.msg(response.message);
+						}
 					}else{
-						layer.msg(response.message);
+                        if(error_callback){
+							error_callback(response);
+						}else{
+							layer.msg(response.message);
+						}
 					}
-					rc.reloadToken(response,setting._istokenreload);
+				}
+				//需要登录
+				else if(response.syscode==403||response.syscode==404){
+					//重新登录
+					window.location.href=contextPath+'/web/gotologin?redirect_url='+window.location.href;
+				}else{
+					layer.msg(response.message);
 				}
 			}catch (e) {
 				console.debug(e);
@@ -470,6 +462,11 @@ var rc = {
 		window.open(encodeurl);
 	},
 
+	remove_token(){
+      if(localStorage.getItem('token')!=null){
+		  localStorage.removeItem('token');
+	  }
+	},
 	/**
 	 * @param _form
 	 * @param callback
@@ -544,6 +541,12 @@ var rc = {
 		rc.$ajax(url,JSON.stringify(param),callback,{
 			contentType:"application/json"
 		});	
+	},
+
+	api_login:function(url,param,callback,error_callback){
+		rc.$ajax(url,JSON.stringify(param),callback,{
+			contentType:"application/json"
+		},error_callback);	
 	},
 
 	/**
@@ -1892,8 +1895,7 @@ function jiangese_set(tabid,start,color1,color2){
      * options
      */
     $.fn.inittable_v2 = function(options,callback) {
-		var token='Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZXJzb24iLCJ1c2VyaWQiOiJDRkJDRURBRTExRUY0NEU5OUEwODFGRTU3RkE5NTRFRCIsIm5hbWUiOiLmnajmn7MiLCJleHBpcmVzIjoxNTQ4NDk3NzIxOTQ2LCJleHAiOjE1NDg0OTc3MjF9.otNqbJ1nOfDC-eMvGEHHnYM5BoAEmHf9ULkMc8E0j0s';
-		localStorage.setItem('token',token);
+		console.log(localStorage.getItem('token'));
 		var _this = $(this);
         _this.options=$.extend({},$.fn.inittable.defaults,options);
         _this.bootstrapTable({
@@ -1912,7 +1914,7 @@ function jiangese_set(tabid,start,color1,color2){
                 }
 			},
 			ajaxOptions:{
-                headers:{"Authorization":localStorage.getItem('token')}
+                headers:{"Authorization":'Bearer '+localStorage.getItem('token')}
 			},
 			responseHandler: function (res) {//这里我查看源码的，在ajax请求成功后，发放数据之前可以对返回的数据进行处理，返回什么部分的数据，比如我的就需要进行整改的！
 				var res_transer={};
@@ -1920,7 +1922,12 @@ function jiangese_set(tabid,start,color1,color2){
 				if(res.syscode==200){
 					res_transer.total=res.obj.total;
 					res_transer.rows=res.obj.list;
-				}else{
+				}
+				//需要登录
+				else if(res.syscode==403||res.syscode==404){
+					window.location.href=contextPath+'/web/gotologin?redirect_url='+window.location.href;
+				}
+				else{
 					layer.msg(res.message);
 				}
 				return res_transer;
