@@ -42,6 +42,7 @@ public class PopupSelectTag implements Tag {
 
     // 值
     private String value;
+
     private String name_value;
 
     // 校验规则

@@ -19,8 +19,10 @@
     <module>wxjy-web-api-common</module>
     <module>wxjy-web-common</module>
     <module>wxjy-web-demo</module>
+	<module>wxjy-web-simplepage-demo</module>
     <module>wxjy-web-cata</module>
     <module>wxjy-web-resource</module>
+	
 
     <module>wxjy-common</module>
     <module>wxjy-common-1.0.6-SNAPSHOT</module>

@@ -29,18 +29,16 @@ public class RadioEditTag implements Tag {
 	private String codetype;
 	
 	//label
-   private String label;
+    private String label;
 			
 	//占位列数,包括label的一列
-   private String cols;
+    private String cols;
 
 	//是否必输
 	private String required;
 	
 	// 值
 	private String value;
-
-	
 
 	public String getCodetype() {
 		return codetype;

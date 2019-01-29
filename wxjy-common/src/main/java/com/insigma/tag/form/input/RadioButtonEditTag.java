@@ -39,8 +39,6 @@ public class RadioButtonEditTag implements Tag {
     // ֵ
     private String value;
 
-
-
     public String getCodetype() {
         return codetype;
     }

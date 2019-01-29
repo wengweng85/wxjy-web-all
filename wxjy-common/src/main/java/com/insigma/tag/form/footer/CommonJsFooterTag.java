@@ -17,7 +17,18 @@ import java.io.IOException;
  */
 public class CommonJsFooterTag implements Tag  {
 	
-	private PageContext pageContext;  
+	private PageContext pageContext;
+
+	// property
+	private String tagVersion;
+
+	public String getTagVersion() {
+		return tagVersion;
+	}
+
+	public void setTagVersion(String tagVersion) {
+		this.tagVersion = tagVersion;
+	}
 
 	@Override
 	public int doEndTag() throws JspException {
@@ -27,6 +38,8 @@ public class CommonJsFooterTag implements Tag  {
 
 	@Override
 	public int doStartTag() throws JspException {
+		// ø’÷µºÏ≤È
+	  tagVersion = (tagVersion == null) ? "1.0" : tagVersion;
 		// TODO Auto-generated method stub
 	  JspWriter out = pageContext.getOut();
 	  // TODO Auto-generated method stub
@@ -95,7 +108,7 @@ public class CommonJsFooterTag implements Tag  {
 	  
 	  //<!--rc about js--> 
 	  sb.append("<script src='"+staticPath+"/webjars/js/rc.all-2.0.js'></script>");
-	  sb.append("<script src='"+staticPath+"/webjars/js/rc.tag-1.0.js'></script>");
+	  sb.append("<script src='"+staticPath+"/webjars/js/rc.tag-"+tagVersion+".js'></script>");
 	  
 	  
 	  //sb.append("<script src='"+staticPath+"/sys/codetype/getAreaData'></script>");

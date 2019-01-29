@@ -1,0 +1,404 @@
+.require {
+	color: red;
+	width: 20px;
+	font-weight: bold;
+}
+
+.form-group{
+	margin-bottom: 5px;
+}
+
+.ibox {
+	clear: both;
+	margin-bottom: 2px;
+	margin-top: 0;
+	padding: 0;
+}
+
+.ibox-content {
+	color: inherit;
+	padding: 5px 10px 10px;
+	border-color: #e7eaec;
+	-webkit-border-image: none;
+	-o-border-image: none;
+	border-image: none;
+	border-style: solid solid none;
+	border-width: 1px 0
+}
+
+.hr-line-dashed {
+	/*border-top: 1px dashed #e7eaec;*/
+	color: #fff;
+	background-color: #fff;
+	margin: 1px;
+}
+
+
+.hr-line-solid {
+	border-bottom: 1px solid #e7eaec;
+	background-color: rgba(0, 0, 0, 0);
+	border-style: solid !important;
+	margin: 2px;
+}
+
+.form-control {
+	background-color: #FFF;
+	--border-bottom: 1px solid #6a6f77;
+	border-radius: 2px;
+	color: inherit;
+	display: block;
+	padding: 6px 12px;
+	-webkit-transition: border-color .15s ease-in-out 0s,box-shadow .15s ease-in-out 0s;
+	transition: border-color .15s ease-in-out 0s,box-shadow .15s ease-in-out 0s;
+	width: 100%;
+	font-size: 14px;
+}
+
+.btn-default {
+	color: #333;
+	background-color: #fff;
+	--border:none;
+	--border-bottom: 0.5px solid #6a6f77;
+}
+
+
+label {
+	font-size:14px;
+	font-weight: normal;
+	--white-space:nowrap;
+	vertical-align:middle;
+	display:inline-block;
+}
+
+
+.wrapper-content {
+	padding: 30px 15px;
+}
+
+#page-wrapper {
+	background: #f4f6fa;
+}
+
+.ibox-content, .ibox-title {
+	border-width: 1px;
+}
+
+.ibox-content:last-child {
+	border-style: solid;
+}
+
+.nav>li.active {
+	--border-left: 3px solid #39aef5;
+	border:none;
+}
+
+.nav-header {
+	padding: 3px 15px 3px;
+	background: url(patterns/header-profile.png) no-repeat;
+	height: 42px;
+	line-height:42px;
+	border-bottom: 2px solid #39aef5;
+	font-size:12px;
+}
+
+
+.img-circle {
+	border-radius: 5px;
+}
+
+.navbar-default .nav>li>a:focus, .navbar-default .nav>li>a:hover
+{
+	background: #39aef5;
+	color: #fff;
+}
+
+.nav.nav-tabs>li.active>a {
+	color: #555;
+}
+
+.content-tabs {
+	border-bottom: solid 2px #39aef5;
+}
+
+.nav.nav-tabs>li.active {
+	background: 0;
+}
+
+.page-tabs a.active {
+	background: #39aef5;
+	color: #fff;
+}
+
+.page-tabs a.active i:hover, .page-tabs a.active:hover {
+	background: #0e9aef;
+	color: #fff;
+}
+
+.navbar-static-side {
+	background: #2f4050;
+}
+
+
+.fa-hover a .fa-detail  {
+	font-size: 14px;
+}
+.fa-hover a:hover .fa-detail   {
+	font-size: 18px;
+	text-indent:-4px;
+}
+
+
+.nav-second-level li,.nav-third-level li,.nav-fourth-level li{border-bottom:none!important;}
+.nav-second-level li a{padding:7px 15px 7px 10px;padding-left:35px;}
+.nav-third-level  li a{padding-left:45px;}
+.nav-fourth-level  li a{padding-left:60px;}
+
+.roll-right.J_tabRight {
+	right: 255px;
+}
+
+
+.roll-right.btn-group {
+	width: 180px;
+	padding: 0;
+}
+
+.roll-right.btn-group button {
+	width: 180px;
+	background: #2f4050;
+	color: #fff;
+	overflow:hidden;
+	white-space:nowrap
+}
+
+.page-tabs a {
+	color: #39aef5;
+	font-weight: bold;
+}
+.roll-left-backword{
+	left:40px;
+}
+
+nav.page-tabs {
+	margin-left: 80px;
+}
+
+.mini-navbar .appelement {
+	display: none;
+	text-align: center;
+}
+.logo-element {
+	padding: 0;
+	text-indent:-2px;
+}
+
+.dropdown-menu > li > a:hover {
+	background: #39aef5;
+}
+
+.dropdown-menu > li > a {
+	display: block;
+	clear: both;
+	font-weight: normal;
+	color: #333;
+	white-space: nowrap;
+}
+
+.wrapper-content {
+	padding: 5px 15px;
+}
+
+.marquee {
+	width: 150px;
+	height:38px;
+	overflow: hidden;
+	border:1px solid #ccc;
+	background: #2f4050;
+	color: #fff;
+}
+
+td{
+	word-wrap:break-word;
+	word-break:break-all;
+}
+
+/* 边距样式 */
+.mr-10{
+	margin-right: 10px;
+}
+
+.mr-10{
+	margin-left: 10px;
+}
+
+.mb-10 {
+	margin-bottom: 10px;
+}
+
+.mt-10 {
+	margin-top: 10px;
+}
+.grid-tools-btn{
+	margin-top: -7px;
+}
+
+body.canvas-menu .navbar-static-side, body.fixed-sidebar .navbar-static-side
+{
+	position: fixed;
+	width: 200px;
+	z-index: 2001;
+	height: 100%;
+}
+
+#page-wrapper {
+	padding: 0 15px;
+	position: inherit;
+	margin: 0 0 0 200px;
+}
+form .col-xs-1, .col-sm-1, .col-xs-2, .col-sm-2{
+	padding-left:3px;
+	padding-right:0;
+}
+
+.div-gallery{
+	float: left;
+	position:relative;
+	margin:10px 20px 10px 20px;
+}
+.div-gallery-add{
+	float: left;
+	width:150px;
+	margin:10px 20px 10px 20px;
+}
+.img-preview{
+	width:60px;
+	height:60px;
+}
+.img-preview-tile{
+	width:150px;
+	height:150px;
+	cursor: pointer;
+}
+.div-img-delete{
+	position:absolute;
+	right: -15px;
+	top:-15px;
+	display:none;
+	cursor: pointer;
+}
+.icon_delete{
+	width: 30px;
+	height: 30px;
+	background-image: url('../../images/wssb/delete_1.png');
+}
+.icon_delete:hover{
+	background-image: url('../../images/wssb/delete_2.png');
+}
+
+.input-group-addon {
+	font-size: 5px;
+	padding: 6px;
+}
+
+.breadcrumb {
+	padding: 8px 22px;
+	margin-bottom: 10px;
+	list-style: none;
+	background-color: #f5f5f5;
+	border-radius: 4px;
+	font-weight: bold;
+}
+
+textarea{outline:none;resize:none;}
+
+/* button橘红色样式 */
+.btn-data.btn-outline {
+	color: #ffa500;
+}
+.btn-danger.btn-outline:hover, .btn-info.btn-outline:hover, .btn-data.btn-outline:hover, .btn-primary.btn-outline:hover,
+.btn-success.btn-outline:hover, .btn-warning.btn-outline:hover {
+	color: #fff;
+}
+.btn-data {
+	background-color: #ffa500;
+	border-color: #ffa500;
+	color: #FFF;
+}
+
+.btn-data.active, .btn-data:active, .btn-data:focus, .btn-data:hover,
+.open .dropdown-toggle.btn-data {
+	background-color: #f6a001;
+	border-color: #f6a001;
+	color: #FFF;
+}
+
+.btn-data.active, .btn-data:active, .open .dropdown-toggle.btn-data {
+	background-image: none;
+}
+
+.btn-data.active[disabled], .btn-data.disabled, .btn-data.disabled.active,
+.btn-data.disabled:active, .btn-data.disabled:focus, .btn-data.disabled:hover,
+.btn-data[disabled], .btn-data[disabled]:active, .btn-data[disabled]:focus,
+.btn-data[disabled]:hover, fieldset[disabled] .btn-data, fieldset[disabled] .btn-data.active,
+fieldset[disabled] .btn-data:active, fieldset[disabled] .btn-data:focus,
+fieldset[disabled] .btn-data:hover {
+	background-color: #ffa500;
+	border-color: #ffa500;
+}
+button.btn-data.dim {
+	box-shadow: inset 0 0 0 #f6a001, 0 5px 0 0 #f6a001, 0 10px 5px #999;
+}
+
+button.btn-data.dim:active {
+	box-shadow: inset 0 0 0 #f6a001, 0 2px 0 0 #f6a001, 0 5px 3px #999;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

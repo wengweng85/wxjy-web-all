@@ -24,10 +24,10 @@ public class CheckboxSwitchEditTag implements Tag {
 	private String property;
 
 	//label
-   private String label;
+    private String label;
 			
 	//占位列数,包括label的一列
-   private String cols;
+    private String cols;
 
 	// 值
 	private String value;

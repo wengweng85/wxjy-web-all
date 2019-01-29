@@ -18,8 +18,10 @@
  */
 var contextPath;// 工程路径
 $(function() {
-	//验证框架使用此属性
-	$.metadata.setType("attr", "validate");
+	if($.metadata){
+		//验证框架使用此属性
+		$.metadata.setType("attr", "validate");
+	}
 
 	if(layer){
 		window.alert=layer.alert;
@@ -340,7 +342,6 @@ var rc = {
 	 */
 	$ajax:function(url,param,callback,setting_in,error_callback){
 		console.debug(url);
-		console.debug(localStorage.getItem('token'));
 		//console.debug(param);
 		var default_setting={
 			method:'post',
@@ -388,9 +389,9 @@ var rc = {
 				console.debug(response);
 				if(response.syscode==200){
 					if(response.success==true){
-						if(response.obj&&response.obj.token){
+						/* if(response.obj&&response.obj.token){
 							localStorage.setItem('token',response.obj.token);
-						}
+						} */
 						//自定义成功回调函数
 						if(callback){
 							callback(response);
@@ -463,9 +464,7 @@ var rc = {
 	},
 
 	remove_token(){
-      if(localStorage.getItem('token')!=null){
-		  localStorage.removeItem('token');
-	  }
+		  localStorage.clear();
 	},
 	/**
 	 * @param _form
@@ -518,35 +517,20 @@ var rc = {
 			layer.alert('请给要提交的表单提供正确的保存路径');
 		}
 	},
-
-
-	/**
-	 * api_post_delete
-	 */
-	api_post_delete:function(url,param,callback){
-		rc.api_post(url,param,callback);
-	},
-
 	/**
 	 * api_post_update
 	 */
-	api_post_update:function(url,param,callback){
+	api_get:function(url,param,callback,error_callback){
 		rc.api_post(url,param,callback);
 	},
 
 	/**
 	 * api_post
 	 */
-	api_post:function(url,param,callback){
+	api_post:function(url,param,callback,error_callback){
 		rc.$ajax(url,JSON.stringify(param),callback,{
 			contentType:"application/json"
 		});	
-	},
-
-	api_login:function(url,param,callback,error_callback){
-		rc.$ajax(url,JSON.stringify(param),callback,{
-			contentType:"application/json"
-		},error_callback);	
 	},
 
 	/**
@@ -1667,67 +1651,67 @@ function imgError(obj){
 
 
 $(function(){
-	//注册一个比较大小的Helper,判断v1是否大于v2
-	Handlebars.registerHelper("compare",function(v1,v2,options){
-		if(v1>v2){
-			//满足添加继续执行
-			return options.fn(this);
-		}else{
-			//不满足条件执行{{else}}部分
-			return options.inverse(this);
-		}
-	});
-	//注册一个比较大小的Helper,判断v1是否等于v2
-	Handlebars.registerHelper("equals",function(v1,v2,options){
-		var v2_arr=[];
-		try{
-			v2_arr=v2.split(',');
-		}catch(e){
-			v2_arr.push(v2);
-		}
-		var b_equals=false;
-		for(var i=0;i<v2_arr.length;i++){
-			if(v1==v2_arr[i]){
-				b_equals=true;
-				break;
+		//注册一个比较大小的Helper,判断v1是否大于v2
+		Handlebars.registerHelper("compare",function(v1,v2,options){
+			if(v1>v2){
+				//满足添加继续执行
+				return options.fn(this);
+			}else{
+				//不满足条件执行{{else}}部分
+				return options.inverse(this);
 			}
-		}
-		if(b_equals){
-			//满足添加继续执行
-			return options.fn(this);
-		}else{
-			//不满足条件执行{{else}}部分
-			return options.inverse(this);
-		}
-	});
-	//注册一个比较大小的Helper,判断v1是否等于v2
-	Handlebars.registerHelper("noequals",function(v1,v2,options){
-        var v2_arr=[];
-        try{
-            v2_arr=v2.split(',');
-        }catch(e){
-            v2_arr.push(v2);
-        }
-        var b_equals=false;
-        for(var i=0;i<v2_arr.length;i++){
-            if(v1==v2_arr[i]){
-                b_equals=true;
-                break;
-            }
-        }
-        if(b_equals){
-            //满足添加继续执行
-            return options.inverse(this);
-        }else{
-            //不满足条件执行{{else}}部分
-            return options.fn(this);
-        }
-	});
-	//注册索引+1的helper
-	 Handlebars.registerHelper("addOne",function(index){
-	    //返回+1之后的结果
-	    return index+1;
-	});
+		});
+		//注册一个比较大小的Helper,判断v1是否等于v2
+		Handlebars.registerHelper("equals",function(v1,v2,options){
+			var v2_arr=[];
+			try{
+				v2_arr=v2.split(',');
+			}catch(e){
+				v2_arr.push(v2);
+			}
+			var b_equals=false;
+			for(var i=0;i<v2_arr.length;i++){
+				if(v1==v2_arr[i]){
+					b_equals=true;
+					break;
+				}
+			}
+			if(b_equals){
+				//满足添加继续执行
+				return options.fn(this);
+			}else{
+				//不满足条件执行{{else}}部分
+				return options.inverse(this);
+			}
+		});
+		//注册一个比较大小的Helper,判断v1是否等于v2
+		Handlebars.registerHelper("noequals",function(v1,v2,options){
+			var v2_arr=[];
+			try{
+				v2_arr=v2.split(',');
+			}catch(e){
+				v2_arr.push(v2);
+			}
+			var b_equals=false;
+			for(var i=0;i<v2_arr.length;i++){
+				if(v1==v2_arr[i]){
+					b_equals=true;
+					break;
+				}
+			}
+			if(b_equals){
+				//满足添加继续执行
+				return options.inverse(this);
+			}else{
+				//不满足条件执行{{else}}部分
+				return options.fn(this);
+			}
+		});
+		//注册索引+1的helper
+		Handlebars.registerHelper("addOne",function(index){
+			//返回+1之后的结果
+			return index+1;
+		});
 })
 
 function jiangese_set(tabid,start,color1,color2){
@@ -1895,7 +1879,6 @@ function jiangese_set(tabid,start,color1,color2){
      * options
      */
     $.fn.inittable_v2 = function(options,callback) {
-		console.log(localStorage.getItem('token'));
 		var _this = $(this);
         _this.options=$.extend({},$.fn.inittable.defaults,options);
         _this.bootstrapTable({

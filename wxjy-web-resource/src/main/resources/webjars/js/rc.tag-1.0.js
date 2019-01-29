@@ -210,5 +210,28 @@ var rc_tag = {
 		}else{
 			layer.msg('代码类型不能为空');
 		}
-	}
+	},
+	
+		/**
+	 * codetype值变化后多级联动
+	 * @param {} currentvalue 当前选中框值
+	 * @param {} next_code_type 下一级数据对应联动代码类型
+	 * @param {} next_selector 全部对应下级选择数组
+	 */
+	code_value_select_data_change:function(currentvalue,next_code_type,next_selector){
+		var url=contextPath+'/sys/codetype/queryByCodeTypeAndParent';
+		rc.ajax(url,{par_code_value:currentvalue,code_type:next_code_type},function(response){
+			//将当前节点后的所有子选择框清空
+			$.each(next_selector,function(index, value, array){
+				 $(value).removeAttr("disabled");
+			     $(value).empty();
+			     $(value).selectpicker('refresh');
+			})
+			//数据加模型生成新的option数组
+			var modeldata=Handlebars.compile($('#tpl_option').html());
+			var views = modeldata(response);
+		    $(next_selector[0]).append(views);
+		    $(next_selector[0]).selectpicker('refresh');
+		})
+	},
 }

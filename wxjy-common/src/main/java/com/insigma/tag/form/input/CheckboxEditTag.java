@@ -29,10 +29,10 @@ public class CheckboxEditTag implements Tag {
 	private String codetype;
 	
 	//label
-   private String label;
+    private String label;
 			
 	//占位列数,包括label的一列
-   private String cols;
+    private String cols;
 
 	//是否必输
 	private String required;
@@ -137,9 +137,9 @@ public class CheckboxEditTag implements Tag {
 					 
 					 for(int j=0;j<vals.length;j++){
 						 if (vals[j] != null && !"".equals(vals[j])) {
-								if (vals[j].equals(codevalue.getCode_value())) {
-									sb.append(" checked=\"checked\" ");
-								}
+							if (vals[j].equals(codevalue.getCode_value())) {
+								sb.append(" checked=\"checked\" ");
+							}
 						 }
 					 }
 					
