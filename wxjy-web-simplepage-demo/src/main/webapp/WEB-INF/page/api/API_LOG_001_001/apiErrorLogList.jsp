@@ -60,7 +60,7 @@
 			    <thead>
 				    <tr>
 				        <th data-formatter="_indexFormatter">序号</th>
-				        <th width="150" data-field="logtime_string" >发生时间</th>
+				        <th width="150" data-field="logtime" >发生时间</th>
 				        <th data-field="url" data-formatter="text_next_row_indexFormatter">访问地址</th>
 				        <th data-field="message">错误信息</th>
 	                    <th data-field="userid">用户编号</th>

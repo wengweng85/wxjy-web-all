@@ -26,7 +26,6 @@
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
                     </a>
-                    <a class="btn btn-info"  onclick="logout()"><i class="fa fa-search"></i>&nbsp;退出</a>
                 </div>
             </div>
             <div class="ibox-content">
@@ -59,6 +58,18 @@
             <div class="ibox-title">
                 <h5>查询结果列表</h5>
                 <div class="ibox-tools">
+                 <button id="btn_delete" type="button" class="btn btn-info" onclick="demo_add()">
+				    <span class="glyphicon glyphicon-plus" aria-hidden="false"></span>新增
+				 </button>
+				 <button id="btn_delete" type="button" class="btn btn-danger" onclick="demo_bat_delete('aac001')">
+				    <span class="glyphicon glyphicon-remove" aria-hidden="false"></span>批量删除
+				 </button>
+				 <button id="btn_add_row" type="button" class="btn btn-info" >
+				    <span class="glyphicon glyphicon-plus" aria-hidden="false"></span>新增一行
+				 </button>
+				 <button id="btn_remove_row" type="button" class="btn btn-danger" >
+				    <span class="glyphicon glyphicon-remove" aria-hidden="false"></span>删除一行
+				 </button>
                 </div>
             </div>
             <!-- 模型 -->
@@ -77,26 +88,8 @@
             </script>
             <!-- toolbar -->
             <div id="toolbar" class="btn-group">
-				 <button id="btn_delete" type="button" class="btn btn-info" onclick="demo_add()">
-				    <span class="glyphicon glyphicon-plus" aria-hidden="false"></span>新增
-				 </button>
-				 <button id="btn_delete" type="button" class="btn btn-danger" onclick="demo_bat_delete('aac001')">
-				    <span class="glyphicon glyphicon-remove" aria-hidden="false"></span>批量删除
-				 </button>
-				 <button id="btn_add_row" type="button" class="btn btn-info" >
-				    <span class="glyphicon glyphicon-plus" aria-hidden="false"></span>新增一行
-				 </button>
-				 <button id="btn_remove_row" type="button" class="btn btn-danger" >
-				    <span class="glyphicon glyphicon-remove" aria-hidden="false"></span>删除一行
-				 </button>
-				 <button id="btn_remove_row" type="button" class="btn btn-info" onclick="sql_excel_export()" >
-				    <span class="glyphicon glyphicon-export" aria-hidden="false"></span>excel导出
-				 </button>
+				
 			</div>
-			
-            <div class="ibox-content">
-            </div>
-            
             <!-- tab -->
             <div class="ibox-content">
 	            <ul id="myTab" class="nav nav-tabs">
@@ -283,7 +276,7 @@
    	  if(aac001){
    		layer.confirm('确定删除要此用户数据吗？', function(index){
    			var url=gateway_base_url+ "/api-demo/demo/ac01/del";
-   			rc.api_post_delete(url, {id:aac001},function (response) {
+   			rc.api_post(url, {id:aac001},function (response) {
    				layer.closeAll('dialog');
    				if(response.success){
    					//console.log('layer'+layer.msg+" "+response.message);
@@ -352,9 +345,9 @@
   	   	     	   var item=selections[i];
   	   	     	   selectnodes+=item[idname]+',';
   	   	       }
-  	   		   rc.ajax("<c:url value='/demo/batdelete'/>", {selectnodes:selectnodes},function (response) {
+  	   		   rc.api_post(gateway_base_url+"/api-demo/demo/ac01/delete/bat", {selectnodes:selectnodes},function (response) {
   	   		    	layer.alert(response.message);
-  	   		    	//$('#ac01table').refreshtable();
+  	   		    	$('#ac01table').refreshtable();
   	   		   }); 
   	    	});
    	    }else{

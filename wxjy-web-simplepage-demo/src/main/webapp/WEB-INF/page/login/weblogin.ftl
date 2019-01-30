@@ -130,8 +130,9 @@ a:hover {color:#CC3300;text-decoration:none;}//对鼠标放到超链接上文字
 	<script src="${website_static_resource_nginx_url}/webjars/js/jQuery/all/jquery.js"></script>
     <script src="${website_static_resource_nginx_url}/webjars/js/bootstrap.min.js"></script>
     <script src="${website_static_resource_nginx_url}/webjars/js/plugins/layer/layer.min.js"></script>
-    <script src="${website_static_resource_nginx_url}/webjars/js/rc.all-2.0.js"></script>
     <script src="${website_static_resource_nginx_url}/webjars/js/md5.js"></script>
+    <script src="${website_static_resource_nginx_url}/webjars/js/jsencrypt.min.js"></script>
+    <script src="${website_static_resource_nginx_url}/webjars/js/rc.all-2.0.js"></script>
 </body>
 <script type="text/javascript">
     $(function(){
@@ -169,15 +170,26 @@ a:hover {color:#CC3300;text-decoration:none;}//对鼠标放到超链接上文字
     	
 		var encrypedPwd =hex_md5($('#password').val());
 		$('#password').val(encrypedPwd); 
-	    
-	    var param = {username:username,password:$('#password').val(),verifycode:verifycode};
-	    var url="${gateway_base_url}/api-auth/token";
+	    var jsencrypt = new JSEncrypt();
+	    var publicKey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCGHPzj0dzM4CmUGkXzpXytccN+mFNSlcFPerAM5QLZvqLHAjcGUT9iTeVGAG8RnD21lXXx++lHf5hSXO91RUANqElKaiQm/wRKTGFQvjyt42R7IU7ikpqOuYc+g3a5CEM9XzjuCHjOIiadVUKZo7Rndotc59Wq85XHGmNRMspXxwIDAQAB";
+        jsencrypt.setPublicKey(publicKey);
+	    var param = {
+		      username:jsencrypt.encrypt(username),
+		      password:jsencrypt.encrypt($('#password').val()),
+	          verifycode:verifycode
+	    };
+	    var url="${gateway_base_url}/api-auth/tokenencode";
 	    rc.api_post(url,param,
 	    function(response){ 
 	         console.log(response);
 	         localStorage.setItem('userinfo',JSON.stringify(response.obj));
 	         localStorage.setItem('token',response.obj.token);
-	         window.location.href=$('#redirect_url').val()
+	         if($('#redirect_url').val()){
+	              //window.location.href=$('#redirect_url').val();
+	              window.location.href=contextPath;
+	         }else{
+	              window.location.href=contextPath;
+	         }
 	    },
 	    function(){  
            $('#password').val('');

@@ -15,29 +15,29 @@
     <div class="wrapper wrapper-content ">
          <table class="table table-bordered table-striped xedittable " id="content">
             <tr>
-                 <td  width="100"><strong>日志编号</strong></td><td>${slog.logid}</td>
+                 <td  width="100"><strong>日志编号</strong></td><td></td>
             </tr>
             <tr>
-                 <td><strong>访问地址</strong></td><td id="url">${slog.url}</td>
+                 <td><strong>访问地址</strong></td><td id="url"></td>
             </tr>
             <tr>
-                 <td><strong>日志时间</strong></td><td id="logtime_string">${slog.logtime_string}</td>
+                 <td><strong>日志时间</strong></td><td id="logtime_string"></td>
             </tr>
             <tr>
-                 <td><strong>日志标题</strong></td><td id="message">${slog.message}</td>
+                 <td><strong>日志标题</strong></td><td id="message"></td>
             </tr>
             <tr>
-                 <td><strong>异常明细</strong></td><td id="stackmsg">${slog.stackmsg}</td>
+                 <td><strong>异常明细</strong></td><td id="stackmsg"></td>
             </tr>
             <tr>
-                 <td><strong>代理信息</strong></td><td id="usergent">${slog.usergent}</td>
+                 <td><strong>代理信息</strong></td><td id="usergent"></td>
             </tr>
             
             <tr>
-                 <td><strong>用户编号</strong></td><td id="userid">${slog.userid}</td>
+                 <td><strong>用户编号</strong></td><td id="userid"></td>
             </tr>
             <tr>
-                 <td><strong>异常类型</strong></td><td id="exceptiontype">${slog.exceptiontype}</td>
+                 <td><strong>异常类型</strong></td><td id="exceptiontype"></td>
             </tr>
         </table>
         </script>

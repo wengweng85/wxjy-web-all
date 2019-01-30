@@ -13,6 +13,8 @@
  *      
  * 2018-1-11 修改xxx    
  * 增加网页版本直接调用接口公共js,在网页端保存token
+ * 更新ajax校验头 如果发现token为空或异常.做重写向处理
+ * 
  * 
  *
  */
@@ -46,13 +48,14 @@ $(function() {
 		function(XMLHttpRequest, textStatus) {
 			// 通过XMLHttpRequest取得响应头，sessionstatus
 			var sessionstatus = XMLHttpRequest.getResponseHeader("statuscode");
-			//登录超时或访问了未授权的信息
-			if (sessionstatus == "session_expired"||sessionstatus == "unauthorized") {
+			// 登录超时或访问了未授权的信息
+			if (sessionstatus == "session_expired"||sessionstatus == "unauthorized"||sessionstatus == "token_error") {
+				console.debug("ajaxsetup sessionstatus "+sessionstatus);
 				var win = window;
 				while (win != win.top){
 					win = win.top;
 				}
-				win.location.href= contextPath+XMLHttpRequest.getResponseHeader("redirecturl");
+				win.location.href= contextPath+XMLHttpRequest.getResponseHeader("redirecturl")+"?redirect_url="+window.location.href;
 			}
 		}
 	});
@@ -375,12 +378,13 @@ var rc = {
 			// 通过XMLHttpRequest取得响应头，sessionstatus
 			// 登录超时或访问了未授权的信息
 			var sessionstatus = xhr.getResponseHeader("statuscode");
-			if (sessionstatus == "session_expired"||sessionstatus == "unauthorized") {
+			if (sessionstatus == "session_expired"||sessionstatus == "unauthorized"||sessionstatus == "token_error") {
+				console.log("complete sessionstatus "+sessionstatus);
 				var win = window;
 				while (win != win.top){
 					win = win.top;
 				}
-				win.location.href= contextPath+xhr.getResponseHeader("redirecturl");
+				win.location.href= contextPath+xhr.getResponseHeader("redirecturl")+"?redirect_url="+window.location.href;
 			}
         	layer.close(layer_ajax_index_);
         },
@@ -389,9 +393,6 @@ var rc = {
 				console.debug(response);
 				if(response.syscode==200){
 					if(response.success==true){
-						/* if(response.obj&&response.obj.token){
-							localStorage.setItem('token',response.obj.token);
-						} */
 						//自定义成功回调函数
 						if(callback){
 							callback(response);
@@ -405,11 +406,6 @@ var rc = {
 							layer.msg(response.message);
 						}
 					}
-				}
-				//需要登录
-				else if(response.syscode==403||response.syscode==404){
-					//重新登录
-					window.location.href=contextPath+'/web/gotologin?redirect_url='+window.location.href;
 				}else{
 					layer.msg(response.message);
 				}
@@ -423,7 +419,7 @@ var rc = {
 			var errormsg= rc.status[textStatus]||textStatus;
 			rc.ajax_error(xhr,errormsg);
 		};
-		options.timeout=60*1000,//超时60秒
+		options.timeout=10*1000,//超时10秒
 		options.global=false;
 		options.dataType = 'json';
 		ajax=$.ajax(options);
@@ -840,7 +836,8 @@ var rc = {
 	 * @returns {number}
 	 */
 	getScreenHeight:function() {
-		/*网页可见区域宽：document.body.clientWidth
+		/*
+		网页可见区域宽：document.body.clientWidth
 		网页可见区域高：document.body.clientHeight
 		网页可见区域宽：document.body.offsetWidth(包括边线的宽)
 		网页可见区域高：document.body.offsetHeight(包括边线的宽)
@@ -1162,6 +1159,31 @@ var rc = {
 		img.css({"width":width,"height":height});//设置缩放后的宽度和高度
 		return width/img_w;
 	},
+    /**
+	 * url签名 随机 字符串+当前时间+签名
+	 */
+	/* signature:function(url){
+		var key="123456789F"
+		var nonce=rc.guid();
+		var timestamp=new Date().getTime()+300000;
+		var a=[];
+		a.push(key,nonce,timestamp);
+		//排序并合并
+		var sign_str=a.sort().join();
+		var signature=hex_sha1(sign_str);
+		var result="nonce="+nonce+"&timestamp="+timestamp+"&signature="+signature;
+		var index = url.indexOf('?');
+		if(index != -1) {
+			//url 中已含有其他参数
+			url = url + '&' + result;
+		} else {
+			//url 中没有其他参数
+			location = url+"?"+result;
+		}
+		console.log(url);
+		return url;
+	}, */
+
 	/**
 	 * ajax文件上传
 	 * @param button
@@ -1897,7 +1919,7 @@ function jiangese_set(tabid,start,color1,color2){
                 }
 			},
 			ajaxOptions:{
-                headers:{"Authorization":'Bearer '+localStorage.getItem('token')}
+				headers:{"Authorization":'Bearer '+localStorage.getItem('token')}
 			},
 			responseHandler: function (res) {//这里我查看源码的，在ajax请求成功后，发放数据之前可以对返回的数据进行处理，返回什么部分的数据，比如我的就需要进行整改的！
 				var res_transer={};
@@ -1905,12 +1927,7 @@ function jiangese_set(tabid,start,color1,color2){
 				if(res.syscode==200){
 					res_transer.total=res.obj.total;
 					res_transer.rows=res.obj.list;
-				}
-				//需要登录
-				else if(res.syscode==403||res.syscode==404){
-					window.location.href=contextPath+'/web/gotologin?redirect_url='+window.location.href;
-				}
-				else{
+				}else{
 					layer.msg(res.message);
 				}
 				return res_transer;
