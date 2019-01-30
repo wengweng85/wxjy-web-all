@@ -66,7 +66,7 @@
                 <a class="link" onclick="demo_view_by_id('{{aac001}}')"><i class="fa fa-file-o"></i>&nbsp;查看</a> 
                 <a class="link" onclick="demo_edit_by_id('{{aac001}}')"><i class="fa fa-edit"></i>&nbsp;编辑</a> 
                 <a class="link" onclick="demo_delete_by_id('{{aac001}}')" ><i class="fa fa-remove"></i>&nbsp;删除</a> 
-                <a class="link" onclick="rc.open_file_list_upload_page('{{aac001}}','001')" ><i class="fa fa-upload"></i>&nbsp;文件上传</a> 
+                <a class="link" onclick="rc.open_file_upload_with_desc_page('{{aac001}}', 'null', 'demo_query','010101')" ><i class="fa fa-upload"></i>&nbsp;文件上传</a> 
             </script>
             
             <script id="tplfile" type="text/x-handlebars-template" >

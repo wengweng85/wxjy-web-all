@@ -19,7 +19,7 @@ import com.insigma.mvc.model.DemoAc01;
  */
 @Controller
 @RequestMapping("/demo")
-public class DemoController extends MvcHelper<DemoAc01> {
+public class WebDemoController extends MvcHelper<DemoAc01> {
 	
 	/**
 	 * 跳转至查询页面

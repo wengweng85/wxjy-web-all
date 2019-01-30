@@ -1,10 +1,6 @@
-<%@ page import="com.insigma.common.listener.AppConfig" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.epsoft.com/rctag" prefix="rc"%>
-<%
-       String gateway_base_url = AppConfig.getProperties("gateway_base_url");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,8 +27,7 @@
             <div class="ibox-content">
 	            <form class="form-horizontal" id="query_form" >
 			       <div class="form-group">
-			           <div class="col-sm-12" align="right">
-			              <rc:textedit property="exceptiontype"   cols="1,3"  label="异常类型" value="你好"/>
+			           <div class="col-sm-3" align="right">
 		                  <a class="btn btn-info" onclick="param_query()"><i class="fa fa-search"></i>&nbsp;查询</a>
 		                  <a class="btn btn-info" onclick="rc.clean($('query_form'))"><i class="fa fa-refresh"></i>&nbsp;重置</a>
 		               </div>
@@ -50,7 +45,7 @@
             </div>
             <!-- toolbar -->
             <div class="ibox-content">
-			    <table id="logtable" data-url="<%=gateway_base_url %>/api-base/errorlogs" 
+			    <table id="logtable" data-url="<c:url value='/log/getErrogLogList'/>" 
 			          data-click-to-select="false"
                       data-show-export="true"
                       data-pagination="true"
@@ -83,7 +78,7 @@
     //初始化
     $(function(){
     	$('.collapse-link').click();
-    	$('#logtable').inittable_v2(demo_options);
+    	$('#logtable').inittable(demo_options);
     });
    
   //用户表格监听,双击 

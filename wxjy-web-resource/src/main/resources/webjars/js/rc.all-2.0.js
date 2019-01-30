@@ -1322,7 +1322,7 @@ var rc = {
         }
     },
     //打开文件上传页面(需填写文件说明)
-    open_file_upload_with_desc_page:function(file_bus_id,url,upload_callback){
+    open_file_upload_with_desc_page:function(file_bus_id,url,upload_callback,file_bus_type){
         if(file_bus_id&&url&&upload_callback){
             layer.open({
                 type: 2,
@@ -1330,7 +1330,7 @@ var rc = {
                 shadeClose: true,
                 shade: 0.8,
                 area: ['450px', '300px'],
-                content: contextPath+"/common/fileload/toFileUploadWithDesc?file_bus_id="+file_bus_id+"&url="+url+"&upload_callback="+upload_callback
+                content: contextPath+"/common/fileload/toFileUploadWithDesc?file_bus_id="+file_bus_id+"&url="+url+"&upload_callback="+upload_callback+"&file_bus_type="+file_bus_type
             });
         }else{
             layer.alert('上传文件需要的业务编号、文件上传路径、回调函数不能为空,请确认');
@@ -2012,8 +2012,8 @@ function jiangese_set(tabid,start,color1,color2){
 var closableTab = {
 	//frame加载完成后设置父容器的高度，使iframe页面与父页面无缝对接
 	frameLoad:function (frame){
-			var mainheight = $(frame).contents().find('body').height();
-			$(frame).parent().height(mainheight);
+		var mainheight = $(frame).contents().find('body').height();
+		$(frame).parent().height(mainheight);
     },
 
     //添加tab

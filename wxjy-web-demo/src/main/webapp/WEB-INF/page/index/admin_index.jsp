@@ -3,8 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ page isELIgnored="false"%>
+<%@ page import="com.insigma.common.listener.AppConfig" %>
 <%
-  String path = request.getContextPath();
+       String website_static_resource_nginx_url =AppConfig.getProperties("website_static_resource_nginx_url");
 %>
 <!DOCTYPE html>
 <html>
@@ -20,11 +21,11 @@
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
-    <link href="<%=path%>/webjars/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<%=path%>/webjars/css/font-awesome.min.css" rel="stylesheet">
-    <link href="<%=path%>/webjars/css/animate.min.css" rel="stylesheet">
-    <link href="<%=path%>/webjars/css/style.min.css" rel="stylesheet">
-    <link href="<%=path%>/webjars/css/rc.css" rel="stylesheet">
+    <link href="<%=website_static_resource_nginx_url%>/webjars/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%=website_static_resource_nginx_url%>/webjars/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<%=website_static_resource_nginx_url%>/webjars/css/animate.min.css" rel="stylesheet">
+    <link href="<%=website_static_resource_nginx_url%>/webjars/css/style.min.css" rel="stylesheet">
+    <link href="<%=website_static_resource_nginx_url%>/webjars/css/rc.css" rel="stylesheet">
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
     <div id="wrapper">
@@ -122,8 +123,8 @@
                 <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
                 </button>
                 <div class="btn-group roll-nav roll-right">
-                    <button class="dropdown J_tabClose" data-toggle="dropdown" title="${suser.username}">
-                        ${suser.username}
+                    <button class="dropdown J_tabClose" data-toggle="dropdown" title="${suser.name}">
+                        ${suser.name}
                     </button>
                     <ul role="menu" class="dropdown-menu dropdown-menu-right">
                         <li>
@@ -156,14 +157,14 @@
         </div>
         <!--右侧部分结束-->
     </div>
-    <script src="<%=path%>/webjars/js/jquery.min.js"></script>
-    <script src="<%=path%>/webjars/js/bootstrap.min.js"></script>
-	<script src="<%=path%>/webjars/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="<%=path%>/webjars/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="<%=path%>/webjars/js/plugins/layer/layer.min.js"></script>
-    <script src="<%=path%>/webjars/js/hplus.min.js"></script>
-    <script src="<%=path%>/webjars/js/bootstrap-contextmenu.js"></script>
-    <script src="<%=path%>/webjars/js/contabs.js"></script>
+    <script src="<%=website_static_resource_nginx_url%>/webjars/js/jquery.min.js"></script>
+    <script src="<%=website_static_resource_nginx_url%>/webjars/js/bootstrap.min.js"></script>
+	<script src="<%=website_static_resource_nginx_url%>/webjars/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="<%=website_static_resource_nginx_url%>/webjars/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="<%=website_static_resource_nginx_url%>/webjars/js/plugins/layer/layer.min.js"></script>
+    <script src="<%=website_static_resource_nginx_url%>/webjars/js/hplus.min.js"></script>
+    <script src="<%=website_static_resource_nginx_url%>/webjars/js/bootstrap-contextmenu.js"></script>
+    <script src="<%=website_static_resource_nginx_url%>/webjars/js/contabs.js"></script>
 
     <script type="text/javascript">
     

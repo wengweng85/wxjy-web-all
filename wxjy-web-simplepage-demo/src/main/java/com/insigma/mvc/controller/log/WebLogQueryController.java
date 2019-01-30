@@ -24,9 +24,9 @@ import com.insigma.mvc.model.SErrorLog;
  */
 @Controller
 @RequestMapping("/log")
-public class ApiLogQueryController extends MvcHelper {
+public class WebLogQueryController extends MvcHelper {
 	
-	Log log=LogFactory.getLog(ApiLogQueryController.class);
+	Log log=LogFactory.getLog(WebLogQueryController.class);
 	
 	/**
 	 * 跳转至错误日志查询页面

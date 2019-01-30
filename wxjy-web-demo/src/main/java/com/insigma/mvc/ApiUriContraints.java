@@ -18,6 +18,9 @@ public class ApiUriContraints {
 	/**
 	 */
 	private static String API_SXJSY="/api-sxjysy";
+	
+	
+	private static String API_BASE="/api-base";
 		
 	/**
 	 * 参数列表服务地址
@@ -29,9 +32,11 @@ public class ApiUriContraints {
 	 */
 	public static String API_CODE_CODEVALUElIST=API_CODE+"/codetype/getInitCodeValueList";
 	
-	
-
 	/**
 	 */
 	public static String API_SXJSY_AC11S=API_SXJSY+"/ac11s";
+	
+	public static String API_BASE_ERRORLOGS=API_BASE+"/errorlogs";
+	
+	public static String API_BASE_ERRORLOG=API_BASE+"/q_errorlog";
 }
