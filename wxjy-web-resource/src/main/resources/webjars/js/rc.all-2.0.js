@@ -221,9 +221,9 @@ var rc = {
             },
             onfocusout: function (element) {
                 // 日期不实时验证
-                if(!$(element).parent().hasClass('form_date')) {
-//                    $(element).valid();
-                }
+                //if(!$(element).parent().hasClass('form_date')) {
+                    $(element).valid();
+                //}
             },
             onkeyup: function (element, event) {
             },
@@ -238,6 +238,7 @@ var rc = {
 				layer.msg(error.html());
 			}*/
 			showErrors:function(errorMap,errorList) {
+				console.log(errorList);
 				if(errorList.length>0){
 					//$(errorList[0].element).focus();
 					//layer.tips(errorList[0].message,$(errorList[0].element),param);
@@ -363,7 +364,10 @@ var rc = {
 		options.headers={
 			'RequestVerificationToken':$("#CSRFToken").val(),
 			'Authorization':'Bearer '+localStorage.getItem('token')
-		},
+		};
+
+		$.extend(options.headers,rc.signature())
+
 		options.type=setting.method;
 		options.cache = false;
 		options.url=url;
@@ -430,13 +434,13 @@ var rc = {
 	 */
 	reloadToken:function(response,istokenreload){
 		//success
-		if((response.success&&istokenreload)||!response.success){
+		/* if((response.success&&istokenreload)||!response.success){
 			if($('#CSRFToken').length>0){
 				$.get(contextPath+"/token",function(data){
 				     $("#CSRFToken").val(data);
 				});
 		    }
-		}
+		} */
 	},
 
 	/**
@@ -506,7 +510,7 @@ var rc = {
 	api_post_submit:function(_form, callback){
 		var param=JSON.stringify(_form.serializeObject());
 		if(_form.attr('action')){
-		    rc.$ajax(_form.attr('action'),param,callback,{
+		    rc.$ajax(_form.attr('action') ,param,callback,{
 				contentType:"application/json"
 			});	
 		}else{
@@ -1036,7 +1040,7 @@ var rc = {
     * @param {} diaplay_element_selector
     */
    autocomplte:function(diaplay_element_selector,url,options) {
-	  var setting={
+	    var setting={
 	    	minChars:1,//在触发前用户至少需要输入的字符数
 	    	width:448, //指定下拉框的宽度
 	    	max:12, //下拉显示项目的个数
@@ -1052,42 +1056,42 @@ var rc = {
 	    }
 	    $.extend(setting,options)
 	    diaplay_element_selector.autocomplete(url,{
-				minChars : setting.minChars,
-				width : setting.width,
-				max:setting.max,
-				cacheLength:setting.cacheLength,
-				mustMatch : setting.mustMatch,
-				scroll:setting.scroll,
-				scrollHeight:setting.scrollHeight,
-				multipleSeparator:setting.multipleSeparator,
-				multiple:setting.multiple,
-				selectFirst:setting.selectFirst,
-				delay:setting.delay,
-				extraParams:setting.extraParams,
-				//加入对返回的json对象进行解析函数，函数返回一个数组
-			    dataType: 'html',
-				parse: function(data) {
-					var rows = [];
-					try{
-						var response = eval('(' + data + ')');
-						for(var i=0; i<response.obj.length; i++){
-							var name=response.obj[i].name;
-							var cou=response.obj[i].cou;
-							rows[rows.length] = {
-								data:{key:name,cou:cou},
-								value:name,
-								result:name
-							};
-						}
-					}catch(e){
-
+			minChars : setting.minChars,
+			width : setting.width,
+			max:setting.max,
+			cacheLength:setting.cacheLength,
+			mustMatch : setting.mustMatch,
+			scroll:setting.scroll,
+			scrollHeight:setting.scrollHeight,
+			multipleSeparator:setting.multipleSeparator,
+			multiple:setting.multiple,
+			selectFirst:setting.selectFirst,
+			delay:setting.delay,
+			extraParams:setting.extraParams,
+			//加入对返回的json对象进行解析函数，函数返回一个数组
+			dataType: 'html',
+			parse: function(data) {
+				var rows = [];
+				try{
+					var response = eval('(' + data + ')');
+					for(var i=0; i<response.obj.length; i++){
+						var name=response.obj[i].name;
+						var cou=response.obj[i].cou;
+						rows[rows.length] = {
+							data:{key:name,cou:cou},
+							value:name,
+							result:name
+						};
 					}
-					return rows;
-				},
-				formatItem: function(row, i, n) {
-					return "<table width='"+setting.width+"px'><tr><td align='left'>" + row.key + "</td>" +
-						"<td align='right'><font style='color: #3013FF; font-family: 黑体;'>约" + row.cou + "个结果</font>&nbsp;&nbsp;</td></tr></table>";
+				}catch(e){
+
 				}
+				return rows;
+			},
+			formatItem: function(row, i, n) {
+				return "<table width='"+setting.width+"px'><tr><td align='left'>" + row.key + "</td>" +
+					"<td align='right'><font style='color: #3013FF; font-family: 黑体;'>约" + row.cou + "个结果</font>&nbsp;&nbsp;</td></tr></table>";
+			}
 		});
    },
    setTab:function(name,cursel,n){
@@ -1162,14 +1166,14 @@ var rc = {
     /**
 	 * url签名 随机 字符串+当前时间+签名
 	 */
-	/* signature:function(url){
+/* 	 signature:function(url){
 		var key="123456789F"
-		var nonce=rc.guid();
-		var timestamp=new Date().getTime()+300000;
+		var nonce=Math.random()*(999999-100000)+100000;
+		var timestamp=(new Date().getTime()+300000);
 		var a=[];
 		a.push(key,nonce,timestamp);
 		//排序并合并
-		var sign_str=a.sort().join();
+		var sign_str=a.sort().join('');
 		var signature=hex_sha1(sign_str);
 		var result="nonce="+nonce+"&timestamp="+timestamp+"&signature="+signature;
 		var index = url.indexOf('?');
@@ -1182,7 +1186,28 @@ var rc = {
 		}
 		console.log(url);
 		return url;
-	}, */
+	},  */
+
+	 /**
+	 * 签名 随机 字符串+当前时间+签名
+	 */
+	signature:function(){
+		var key="123456789F"
+		var nonce=Math.random()*(999999-100000)+100000;
+		var timestamp=(new Date().getTime()+60000);
+		var a=[];
+		a.push(key,nonce,timestamp);
+		//排序并合并
+		var sign_str=a.sort().join('');
+		console.debug(sign_str);
+		var signature=hex_sha1(sign_str);
+		var result={
+			nonce:nonce,
+			timestamp:timestamp,
+			signature:signature
+		};
+		return result;
+	},
 
 	/**
 	 * ajax文件上传
@@ -1249,7 +1274,7 @@ var rc = {
 			}else{
 				button.val(response.message);
 			}
-			}
+		  }
 		});
 	},
 	/**页面端发出的数据作两次encodeURI,防止中文乱码*/
@@ -1295,7 +1320,6 @@ var rc = {
     	}else{
     		layer.alert('上传文件需要的业务编号及业务类型不能为空,请确认');
     	}
-    	
     }, 
     
     //打开文件上传页面
@@ -1919,7 +1943,7 @@ function jiangese_set(tabid,start,color1,color2){
                 }
 			},
 			ajaxOptions:{
-				headers:{"Authorization":'Bearer '+localStorage.getItem('token')}
+				headers: {"Authorization":'Bearer '+localStorage.getItem('token')}
 			},
 			responseHandler: function (res) {//这里我查看源码的，在ajax请求成功后，发放数据之前可以对返回的数据进行处理，返回什么部分的数据，比如我的就需要进行整改的！
 				var res_transer={};
@@ -2050,7 +2074,6 @@ var closableTab = {
 		 	var tabpanel = '<div role="tabpanel" class="tab-pane" id="'+container+'" style="width: 100%;height:100%;">'+
 					        '<iframe src="'+tabItem.url+'" id="tab_frame_2" frameborder="0" style="overflow-x: hidden; overflow-y: hidden;width:100%;height: 100%"  onload="closableTab.frameLoad(this)"></iframe>'+
 				            '</div>';
-
 			$('.nav-tabs').append(li_tab);
 			$('.tab-content').append(tabpanel);
 		}
@@ -2102,4 +2125,178 @@ function help(url_suffix) {
 		  area: ['82%', '90%'],
 		  content: contextPath+'/module_help/'+url_suffix
 	});
+}
+
+/*
+ * A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined
+ * in FIPS PUB 180-1
+ * Version 2.1-BETA Copyright Paul Johnston 2000 - 2002.
+ * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
+ * Distributed under the BSD License
+ * See http://pajhome.org.uk/crypt/md5 for details.
+ */
+/*
+ * Configurable variables. You may need to tweak these to be compatible with
+ * the server-side, but the defaults work in most cases.
+ */
+var hexcase = 0; /* hex output format. 0 - lowercase; 1 - uppercase     */
+var b64pad = ""; /* base-64 pad character. "=" for strict RFC compliance  */
+var chrsz = 8; /* bits per input character. 8 - ASCII; 16 - Unicode    */
+/*
+ * These are the functions you'll usually want to call
+ * They take string arguments and return either hex or base-64 encoded strings
+ */
+function hex_sha1(s) {
+ return binb2hex(core_sha1(str2binb(s), s.length * chrsz));
+}
+function b64_sha1(s) {
+ return binb2b64(core_sha1(str2binb(s), s.length * chrsz));
+}
+function str_sha1(s) {
+ return binb2str(core_sha1(str2binb(s), s.length * chrsz));
+}
+function hex_hmac_sha1(key, data) {
+ return binb2hex(core_hmac_sha1(key, data));
+}
+function b64_hmac_sha1(key, data) {
+ return binb2b64(core_hmac_sha1(key, data));
+}
+function str_hmac_sha1(key, data) {
+ return binb2str(core_hmac_sha1(key, data));
+}
+/*
+ * Perform a simple self-test to see if the VM is working
+ */
+function sha1_vm_test() {
+ return hex_sha1("abc") == "a9993e364706816aba3e25717850c26c9cd0d89d";
+}
+/*
+ * Calculate the SHA-1 of an array of big-endian words, and a bit length
+ */
+function core_sha1(x, len) {
+ /* append padding */
+ x[len >> 5] |= 0x80 << (24 - len % 32);
+ x[((len + 64 >> 9) << 4) + 15] = len;
+ var w = Array(80);
+ var a = 1732584193;
+ var b = -271733879;
+ var c = -1732584194;
+ var d = 271733878;
+ var e = -1009589776;
+ for (var i = 0; i < x.length; i += 16) {
+  var olda = a;
+  var oldb = b;
+  var oldc = c;
+  var oldd = d;
+  var olde = e;
+  for (var j = 0; j < 80; j++) {
+   if (j < 16) w[j] = x[i + j];
+   else w[j] = rol(w[j - 3] ^ w[j - 8] ^ w[j - 14] ^ w[j - 16], 1);
+   var t = safe_add(safe_add(rol(a, 5), sha1_ft(j, b, c, d)), safe_add(safe_add(e, w[j]), sha1_kt(j)));
+   e = d;
+   d = c;
+   c = rol(b, 30);
+   b = a;
+   a = t;
+  }
+  a = safe_add(a, olda);
+  b = safe_add(b, oldb);
+  c = safe_add(c, oldc);
+  d = safe_add(d, oldd);
+  e = safe_add(e, olde);
+ }
+ return Array(a, b, c, d, e);
+}
+/*
+ * Perform the appropriate triplet combination function for the current
+ * iteration
+ */
+function sha1_ft(t, b, c, d) {
+ if (t < 20) return (b & c) | ((~b) & d);
+ if (t < 40) return b ^ c ^ d;
+ if (t < 60) return (b & c) | (b & d) | (c & d);
+ return b ^ c ^ d;
+}
+/*
+ * Determine the appropriate additive constant for the current iteration
+ */
+function sha1_kt(t) {
+ return (t < 20) ? 1518500249 : (t < 40) ? 1859775393 : (t < 60) ? -1894007588 : -899497514;
+}
+/*
+ * Calculate the HMAC-SHA1 of a key and some data
+ */
+function core_hmac_sha1(key, data) {
+ var bkey = str2binb(key);
+ if (bkey.length > 16) bkey = core_sha1(bkey, key.length * chrsz);
+ var ipad = Array(16),
+  opad = Array(16);
+ for (var i = 0; i < 16; i++) {
+  ipad[i] = bkey[i] ^ 0x36363636;
+  opad[i] = bkey[i] ^ 0x5C5C5C5C;
+ }
+ var hash = core_sha1(ipad.concat(str2binb(data)), 512 + data.length * chrsz);
+ return core_sha1(opad.concat(hash), 512 + 160);
+}
+/*
+ * Add integers, wrapping at 2^32. This uses 16-bit operations internally
+ * to work around bugs in some JS interpreters.
+ */
+function safe_add(x, y) {
+ var lsw = (x & 0xFFFF) + (y & 0xFFFF);
+ var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
+ return (msw << 16) | (lsw & 0xFFFF);
+}
+/*
+ * Bitwise rotate a 32-bit number to the left.
+ */
+function rol(num, cnt) {
+ return (num << cnt) | (num >>> (32 - cnt));
+}
+/*
+ * Convert an 8-bit or 16-bit string to an array of big-endian words
+ * In 8-bit function, characters >255 have their hi-byte silently ignored.
+ */
+function str2binb(str) {
+ var bin = Array();
+ var mask = (1 << chrsz) - 1;
+ for (var i = 0; i < str.length * chrsz; i += chrsz)
+ bin[i >> 5] |= (str.charCodeAt(i / chrsz) & mask) << (24 - i % 32);
+ return bin;
+}
+/*
+ * Convert an array of big-endian words to a string
+ */
+function binb2str(bin) {
+ var str = "";
+ var mask = (1 << chrsz) - 1;
+ for (var i = 0; i < bin.length * 32; i += chrsz)
+ str += String.fromCharCode((bin[i >> 5] >>> (24 - i % 32)) & mask);
+ return str;
+}
+/*
+ * Convert an array of big-endian words to a hex string.
+ */
+function binb2hex(binarray) {
+ var hex_tab = hexcase ? "0123456789ABCDEF" : "0123456789abcdef";
+ var str = "";
+ for (var i = 0; i < binarray.length * 4; i++) {
+  str += hex_tab.charAt((binarray[i >> 2] >> ((3 - i % 4) * 8 + 4)) & 0xF) + hex_tab.charAt((binarray[i >> 2] >> ((3 - i % 4) * 8)) & 0xF);
+ }
+ return str;
+}
+/*
+ * Convert an array of big-endian words to a base-64 string
+ */
+function binb2b64(binarray) {
+ var tab = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+ var str = "";
+ for (var i = 0; i < binarray.length * 4; i += 3) {
+  var triplet = (((binarray[i >> 2] >> 8 * (3 - i % 4)) & 0xFF) << 16) | (((binarray[i + 1 >> 2] >> 8 * (3 - (i + 1) % 4)) & 0xFF) << 8) | ((binarray[i + 2 >> 2] >> 8 * (3 - (i + 2) % 4)) & 0xFF);
+  for (var j = 0; j < 4; j++) {
+   if (i * 8 + j * 6 > binarray.length * 32) str += b64pad;
+   else str += tab.charAt((triplet >> 6 * (3 - j)) & 0x3F);
+  }
+ }
+ return str;
 }

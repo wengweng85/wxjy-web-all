@@ -26,8 +26,12 @@
 target
 sxjy-cloud-view
 sxjyggfw-common-model
+wxjy-pxjd
+wxjy-pxjd-api
+wxjy-model
 .mvn
 .idea
+.svn
  
 *.class
 *.class

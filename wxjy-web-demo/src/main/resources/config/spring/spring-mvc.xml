@@ -57,7 +57,7 @@
     <mvc:default-servlet-handler/>
 
      <!-- 静态资源访问jar包 -->
-    <!--  <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"></mvc:resources> -->
+    <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"></mvc:resources>
     
      <mvc:interceptors>
         <!-- 管理平台 -->

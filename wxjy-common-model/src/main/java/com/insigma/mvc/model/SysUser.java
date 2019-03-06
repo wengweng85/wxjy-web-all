@@ -6,7 +6,7 @@ import java.util.List;
 
 
 /**
- *  ÏµÍ³¹ÜÀí±íÖ®ÓÃ»§ĞÅÏ¢±í
+ *  ÏµÍ³ï¿½ï¿½ï¿½ï¿½ï¿½Ö®ï¿½Ã»ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½
  */
 public class SysUser implements java.io.Serializable {
 	
@@ -18,6 +18,7 @@ public class SysUser implements java.io.Serializable {
 	private String enabled;
 	private String groupid;
 	private String groupname;
+	private String grouptype;
 	private String groupparentid;
 	private String type;
 	private String isgrant;
@@ -39,28 +40,28 @@ public class SysUser implements java.io.Serializable {
 	private String abz182;
 
 
-	//²ĞÁªÏîÄ¿Ôö¼Ó
-	private String sys_user_logintimes	;//	µÇÂ¼´ÎÊı
-	private String uid	;//ÕşÎñÍøÓÃ»§Ö÷¼ü
-	private String oid;//ÕşÎñÍø·şÎñ»ú¹¹Ö÷¼ü
-	private String sys_user_idcard	;//	ÄÚÍøÓÃ»§Éí·İÖ¤
-	private String area_code	;//	ÄÚÍøÓÃ»§ÇøÓò±àÂë
-	private String nation	;//	ÄÚÍøÓÃ»§Ãñ×å
-	private String sex	;//	ÄÚÍøÓÃ»§ĞÔ±ğ1ÄĞ 2Å®
-	private String birthday	;//	ÄÚÍøÓÃ»§ÉúÈÕ
-	private String politicsface	;//	ÄÚÍøÓÃ»§ÕşÖÎÃæÃ²
-	private String headpicture	;//	ÄÚÍøÓÃ»§Í·ÏñµØÖ·
-	private String userstatus	;//	ÄÚÍøÓÃ»§×´Ì¬´úÂë1.ÔÚÖ° 2.ÀëÖ°
-	private String title	;//	ÄÚÍøÓÃ»§Ö°³Æ
-	private String officeaddr	;//	ÄÚÍøÓÃ»§°ì¹«ÊÒ
-	private String mobilephone2	;//	ÄÚÍøÓÃ»§±¸ÓÃÊÖ»ú
-	private String virtualnum	;//	ÄÚÍøÓÃ»§ĞéÄâ¶ÌºÅ
-	private String postcode	;//	ÄÚÍøÓÃ»§ÓÊ±à
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½
+	private String sys_user_logintimes	;//	ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½
+	private String uid	;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String oid;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String sys_user_idcard	;//	ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ö¤
+	private String area_code	;//	ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String nation	;//	ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String sex	;//	ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ô±ï¿½1ï¿½ï¿½ 2Å®
+	private String birthday	;//	ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String politicsface	;//	ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã²
+	private String headpicture	;//	ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Í·ï¿½ï¿½ï¿½Ö·
+	private String userstatus	;//	ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½1.ï¿½ï¿½Ö° 2.ï¿½ï¿½Ö°
+	private String title	;//	ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ö°ï¿½ï¿½
+	private String officeaddr	;//	ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ì¹«ï¿½ï¿½
+	private String mobilephone2	;//	ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½
+	private String virtualnum	;//	ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ìºï¿½
+	private String postcode	;//	ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ê±ï¿½
 
-	private String province	;//	ÄÚÍøÓÃ»§Ê¡¼®
-	private String city	;//	ÄÚÍøÓÃ»§³ÇÊĞ
-	private String jobids;//¸ÚÎ»ÁĞ±í£¬¶à¸öÖ®¼äÓÃ "," ¸ô¿ª
-	private String positionids;//Ö°ÎñÁĞ±í£¬¶à¸öÖ®¼äÓÃ "," ¸ô¿ª
+	private String province	;//	ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ê¡ï¿½ï¿½
+	private String city	;//	ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String jobids;//ï¿½ï¿½Î»ï¿½Ğ±ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½ï¿½ï¿½ "," ï¿½ï¿½ï¿½ï¿½
+	private String positionids;//Ö°ï¿½ï¿½ï¿½Ğ±ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½ï¿½ï¿½ "," ï¿½ï¿½ï¿½ï¿½
 
 	public String getSys_user_logintimes() {
 		return sys_user_logintimes;
@@ -378,6 +379,13 @@ public class SysUser implements java.io.Serializable {
 	public void setPositionids(String positionids) {
 		this.positionids = positionids;
 	}
-	
-	
+
+
+	public String getGrouptype() {
+		return grouptype;
+	}
+
+	public void setGrouptype(String grouptype) {
+		this.grouptype = grouptype;
+	}
 }

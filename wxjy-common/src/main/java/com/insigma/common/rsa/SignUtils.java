@@ -25,7 +25,7 @@ public class SignUtils {
 	private final static String SIGN_NONCE="nonce";
 
 	//时间戳有效果期
-	private static final long TIMESTAMP=5*60*1000;
+	private static final long TIMESTAMP=1*60*1000;
 
 	/**
 	 * 根据给定摘要算法名称创建一个消息摘要实例

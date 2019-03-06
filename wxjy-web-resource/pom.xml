@@ -3,11 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.insigma</groupId>
     <packaging>jar</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <name>wxjy-web-resource</name>
     <url>http://maven.apache.org</url>
     <description>
-       修改名字为wabjars
+        修改名字为wabjars
+        版本升级为1.0.1
     </description>
     <dependencies>
        

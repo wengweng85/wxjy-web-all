@@ -349,7 +349,11 @@ public class JpushClientUtil {
     }
 
     public static void main(String[] args){
-        if(JpushClientUtil.sendToAllAndroid("testAndroid","testAndroid","this is a Android Dev test","")==1){
+        /*if(JpushClientUtil.sendToAllAndroid("testAndroid","testAndroid","this is a Android Dev test","")==1){
+            log.info("success");
+        }*/
+
+        if(JpushClientUtil.sendToAllIos("testAndroid","testAndroid","this is a Android Dev test","")==1){
             log.info("success");
         }
     }

@@ -19,6 +19,7 @@ public class SysUser implements java.io.Serializable {
 	private String groupid;
 	private String groupname;
 	private String groupparentid;
+	private String grouptype;
 	private String type;
 	private String isgrant;
 	private String aab301;
@@ -378,6 +379,12 @@ public class SysUser implements java.io.Serializable {
 	public void setPositionids(String positionids) {
 		this.positionids = positionids;
 	}
-	
-	
+
+	public String getGrouptype() {
+		return grouptype;
+	}
+
+	public void setGrouptype(String grouptype) {
+		this.grouptype = grouptype;
+	}
 }

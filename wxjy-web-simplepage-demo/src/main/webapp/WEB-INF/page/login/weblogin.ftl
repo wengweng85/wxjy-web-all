@@ -21,27 +21,27 @@ position: absolute;left: 40px;top:105px;font-family:'Microsoft YaHei';
 color:#4e4e4e;font-size:18px;
 }
 .maintext tr{
-height: 50px;
+   height: 50px;
 }
 /*核心中间部分内容*/
 #center_right{
- float:right;width:390px; height:400px; background:url(${homeModule}/resource/images/text_backbg.png) no-repeat;
- top: 210px;position: fixed;right: 8%;
+   float:right;width:390px; height:400px; background:url(${homeModule}/resource/images/text_backbg.png) no-repeat;
+   top: 210px;position: fixed;right: 8%;
 }
 #foot{
- width:100%; position: fixed;top:720px;
+   width:100%; position: fixed;top:720px;
 }
 #foot_bady{
-text-align:center;
+   text-align:center;
 }
 #foot_bady span{ 
-  font-size:14px; color:black; font-family:'宋体';
+   font-size:14px; color:black; font-family:'宋体';
 }
 .btn{ 
-  width:241px; border:1px #B2B2B2 solid; height:35px; line-height: 30px;
+   width:241px; border:1px #B2B2B2 solid; height:35px; line-height: 30px;
 }
 .btn2{ 
-  width:150px; border:1px #B2B2B2 solid; height:30px; line-height: 30px;
+   width:150px; border:1px #B2B2B2 solid; height:30px; line-height: 30px;
 }
 .login a {
 	position: absolute;
@@ -176,12 +176,12 @@ a:hover {color:#CC3300;text-decoration:none;}//对鼠标放到超链接上文字
 	    var param = {
 		      username:jsencrypt.encrypt(username),
 		      password:jsencrypt.encrypt($('#password').val()),
-	          verifycode:verifycode
+	          verifycode:jsencrypt.encrypt(verifycode)
 	    };
 	    var url="${gateway_base_url}/api-auth/tokenencode";
 	    rc.api_post(url,param,
 	    function(response){ 
-	         console.log(response);
+	         //console.log(response);
 	         localStorage.setItem('userinfo',JSON.stringify(response.obj));
 	         localStorage.setItem('token',response.obj.token);
 	         if($('#redirect_url').val()){
@@ -192,9 +192,9 @@ a:hover {color:#CC3300;text-decoration:none;}//对鼠标放到超链接上文字
 	         }
 	    },
 	    function(){  
-           $('#password').val('');
-    	   $('#verifycode').val('');
-    	   _reload_verfy_code();}
+            $('#password').val('');
+    	    $('#verifycode').val('');
+    	    _reload_verfy_code();}
 	    );
 	}
 	

@@ -1119,8 +1119,8 @@ public class RSAUtils {
         //计算接口时间是否过期
         Date nowTime = new Date(System.currentTimeMillis());
         Date timestamp_time= new Date(timestamp);
-        System.out.println("nowTime="+nowTime.toString());
-        System.out.println("timestamp_time="+timestamp_time.toString());
+        //System.out.println("nowTime="+nowTime.toString());
+        //System.out.println("timestamp_time="+timestamp_time.toString());
         if(timestamp_time.after(nowTime)){
             //AES密文，AES(P)
             String aesCipherText = dataArr[0];

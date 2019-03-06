@@ -22,7 +22,10 @@
 	<module>wxjy-web-simplepage-demo</module>
     <module>wxjy-web-cata</module>
     <module>wxjy-web-resource</module>
-	
+
+    <module>wxjy-pxjd</module>
+    <module>wxjy-pxjd-api</module>
+    <module>wxjy-model</module>
 
     <module>wxjy-common</module>
     <module>wxjy-common-1.0.6-SNAPSHOT</module>
