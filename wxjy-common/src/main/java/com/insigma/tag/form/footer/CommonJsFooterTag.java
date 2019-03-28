@@ -1,13 +1,14 @@
 package com.insigma.tag.form.footer;
 
-import com.insigma.common.listener.AppConfig;
+import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.Tag;
-import java.io.IOException;
+
+import com.insigma.common.listener.AppConfig;
 
 
 /**
@@ -22,12 +23,23 @@ public class CommonJsFooterTag implements Tag  {
 	// property
 	private String tagVersion;
 
+	private String customeJsUrl;
+
 	public String getTagVersion() {
 		return tagVersion;
 	}
 
 	public void setTagVersion(String tagVersion) {
 		this.tagVersion = tagVersion;
+	}
+
+
+	public String getCustomeJsUrl() {
+		return customeJsUrl;
+	}
+
+	public void setCustomeJsUrl(String customeJsUrl) {
+		this.customeJsUrl = customeJsUrl;
 	}
 
 	@Override
@@ -38,13 +50,15 @@ public class CommonJsFooterTag implements Tag  {
 
 	@Override
 	public int doStartTag() throws JspException {
-		// 空值检查
-	  tagVersion = (tagVersion == null) ? "1.0" : tagVersion;
-		// TODO Auto-generated method stub
-	  JspWriter out = pageContext.getOut();
 	  // TODO Auto-generated method stub
 	  HttpServletRequest request=((HttpServletRequest) this.pageContext.getRequest());
 	  String contextpath = request.getContextPath();
+	  // 空值检查
+	  tagVersion = (tagVersion == null) ? "1.0" : tagVersion;
+	  customeJsUrl= (customeJsUrl == null) ? contextpath+"/resource/js/rc.custom.js" : customeJsUrl;
+		// TODO Auto-generated method stub
+	  JspWriter out = pageContext.getOut();
+
 	  String staticPath=contextpath;
 	  //静态地址nginx
 	  String website_static_resource_nginx_url = AppConfig.getProperties("website_static_resource_nginx_url");
@@ -105,12 +119,21 @@ public class CommonJsFooterTag implements Tag  {
 	
 	  sb.append("<script src='"+staticPath+"/webjars/js/bootstrap-paginator.js'></script>");
 	  sb.append("<script src='"+staticPath+"/webjars/js/bootstrap-closable-tab.js'></script>");
-	  
-	  //<!--rc about js--> 
+
+	  // drag
+	  sb.append("<script src='"+staticPath+"/webjars/js/plugins/bootstrap-table/extensions/reorder-rows/bootstrap-table-reorder-rows.min.js'></script>");
+
+
+		//<!--rc about js-->
 	  sb.append("<script src='"+staticPath+"/webjars/js/rc.all-2.0.js'></script>");
 	  sb.append("<script src='"+staticPath+"/webjars/js/rc.tag-"+tagVersion+".js'></script>");
-	  
-	  
+
+	  sb.append("<script src='"+customeJsUrl+"'></script>");
+
+	  //自定义js加载
+	  sb.append("<script>");
+	  //sb.append("$.getScript('"+customeJsUrl+"', function() {console.debug('load success')})");
+	  sb.append("</script>");
 	  //sb.append("<script src='"+staticPath+"/sys/codetype/getAreaData'></script>");
 	  //sb.append("<script src='"+staticPath+"/webjars/js/selector/area_select.js'></script>");
 	  

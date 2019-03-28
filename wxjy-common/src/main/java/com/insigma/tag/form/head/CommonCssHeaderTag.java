@@ -72,6 +72,9 @@ public class CommonCssHeaderTag implements Tag {
         //bootstrap-switch
         sb.append("<link href='" + staticPath + "/webjars/css/plugins/bootstrap-switch-master/dist/css/bootstrap3/bootstrap-switch.min.css' rel='stylesheet'>");
 
+        //drag
+        sb.append("<link href='" + staticPath + "/webjars/js/plugins/bootstrap-table/extensions/reorder-rows/bootstrap-table-reorder-rows.css' rel='stylesheet'>");
+
         //<!-- rc.css -->
         sb.append("<link href='" + staticPath + "/webjars/css/rc.css' rel='stylesheet'>");
 

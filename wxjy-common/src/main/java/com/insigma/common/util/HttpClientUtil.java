@@ -274,7 +274,7 @@ public class HttpClientUtil {
 	}
 
 	public static void main(String [] a){
-		HttpClientUtil.doGet("http://www.epsoft.com.cn/", "utf-8");
+		HttpClientUtil.doGet("https://www.baidu.com", "utf-8");
 	}
 }
 
