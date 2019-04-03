@@ -38,19 +38,16 @@
     <orderEntry type="library" name="Maven: cn.jpush.api:jiguang-common:1.1.3" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-all:4.1.6.Final" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.3" level="project" />
+    <orderEntry type="library" name="Maven: com.google.zxing:core:3.3.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.shiro:shiro-cas:1.2.3" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:18.0" level="project" />
-    <orderEntry type="library" name="Maven: com.insigma:wxjy-web-resource:1.0.0-SNAPSHOT" level="project" />
+    <orderEntry type="module" module-name="wxjy-web-resource" />
     <orderEntry type="library" name="Maven: com.insigma:sxjyggfw-common-model:1.0.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.thymeleaf:thymeleaf-spring4:3.0.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.thymeleaf:thymeleaf:3.0.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.attoparser:attoparser:2.0.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.unbescape:unbescape:1.1.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:4.8.1" level="project" />
-    <orderEntry type="library" name="Maven: com.alibaba:dubbo:2.6.1" level="project" />
-    <orderEntry type="library" name="Maven: org.javassist:javassist:3.20.0-GA" level="project" />
-    <orderEntry type="library" name="Maven: org.jboss.netty:netty:3.2.5.Final" level="project" />
-    <orderEntry type="library" name="Maven: com.caucho:hessian:4.0.7" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:4.2.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-core:4.2.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context:4.2.8.RELEASE" level="project" />
@@ -69,6 +66,7 @@
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-entitymanager:4.2.7.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.logging:jboss-logging:3.1.0.GA" level="project" />
     <orderEntry type="library" name="Maven: dom4j:dom4j:1.6.1" level="project" />
+    <orderEntry type="library" name="Maven: org.javassist:javassist:3.18.1-GA" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.spec.javax.transaction:jboss-transaction-api_1.1_spec:1.0.1.Final" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-core:4.2.7.Final" level="project" />

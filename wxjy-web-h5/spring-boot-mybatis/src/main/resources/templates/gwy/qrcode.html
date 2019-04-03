@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta name="format-detection" content="address=no;">
+    <title>身份认证</title>
+    <link rel="stylesheet" th:href="@{/css/weui.min.css}">
+    <link rel="stylesheet" th:href="@{/css/jquery-weui.min.css}">
+</head>
+<body>
+
+<input style='display:none;' id='phone_num' value='${phone_num}'>
+
+<div style='margin-top: 20px;
+    font-size: 20px;
+    color: blue;
+    text-align: center;
+    border-bottom: 1px solid;
+    padding-bottom: 10px;'>意见反馈</div>
+
+<div class="weui-cells weui-cells_radio" style='margin-top: 10px;'>
+    <h3 style='text-align: left;
+	    margin: 10px;
+	    color: blue;
+	    font-weight: 200;'>选择项目
+        <a  style='margin: 30px;' href="#" class="weui-btn green-btn" hover-class="green-hover-class" onClick="coureScore()">进入课程评价</a>
+    </h3>
+
+
+</div>
+
+<!-- <div class="weui-navbar" style='margin-top: 60px;'>
+  <div class="weui-navbar__item weui_bar__item_on" onClick='changetab(1)'>
+    项目反馈
+  </div>
+  <div class="weui-navbar__item" onClick='changetab(2)'>
+    课程反馈
+  </div>
+</div> -->
+
+<div id='projectdiv'>
+
+    <div class="weui-cells weui-cells_checkbox">
+        <h3 style='text-align: center;
+    margin: 8px;
+    font-weight: 300;'>培训设计(共30分)</h3>
+        <label class="weui-cell weui-check__label" for="G0601">
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check" name="checkbox1" id="G0601">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>目标设定(10分)</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" for="G0602">
+            <div class="weui-cell__hd">
+                <input type="checkbox" name="checkbox1" class="weui-check" id="G0602">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>课程设置(10分)</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" for="G0603">
+            <div class="weui-cell__hd">
+                <input type="checkbox" name="checkbox1" class="weui-check" id="G0603">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>师资配备(10分)</p>
+            </div>
+        </label>
+        <h3 style='text-align: center;
+    margin: 8px;
+    font-weight: 300;'>培训实施(共30分)</h3>
+        <label class="weui-cell weui-check__label" for="G0604">
+            <div class="weui-cell__hd">
+                <input type="checkbox" name="checkbox1" class="weui-check" id="G0604">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>教学内容(10分)</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" for="G0605">
+            <div class="weui-cell__hd">
+                <input type="checkbox" name="checkbox1" class="weui-check" id="G0605">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>教学方法(10分)</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" for="G0606">
+            <div class="weui-cell__hd">
+                <input type="checkbox" name="checkbox1" class="weui-check" id="G0606">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>教学水平(10分)</p>
+            </div>
+        </label>
+        <h3 style='text-align: center;
+    margin: 8px;
+    font-weight: 300;'>培训管理(共20分)</h3>
+        <label class="weui-cell weui-check__label" for="G0607">
+            <div class="weui-cell__hd">
+                <input type="checkbox" name="checkbox1" class="weui-check" id="G0607">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>校风教风(10分)</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" for="G0608">
+            <div class="weui-cell__hd">
+                <input type="checkbox" name="checkbox1" class="weui-check" id="G0608">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>学员学风(10分)</p>
+            </div>
+        </label>
+        <h3 style='text-align: center;
+    margin: 8px;
+    font-weight: 300;'>培训效果(共20分)</h3>
+        <label class="weui-cell weui-check__label" for="G0609">
+            <div class="weui-cell__hd">
+                <input type="checkbox" name="checkbox1" class="weui-check" id="G0609">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>对实际工作的帮助(10分)</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" for="G0610">
+            <div class="weui-cell__hd">
+                <input type="checkbox" name="checkbox1" class="weui-check" id="G0610">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>能力素养的提高(10分)</p>
+            </div>
+        </label>
+    </div>
+
+    <a  style='margin: 30px;' href="#" class="weui-btn green-btn" hover-class="green-hover-class" onClick="projectScore()">项目评价提交</a>
+
+</div>
+
+<!-- 	<div id="coursediv" style='margin-top: 30px;'>
+		课程
+	</div> -->
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/fastclick.js}"></script>
+<script th:src="@{/js/jquery-weui.min.js}"></script>
+<script type="text/javascript">
+    $(function() {FastClick.attach(document.body);});
+    function projectScore(){
+        var array=[];
+        var radio1val=$('input:radio[name="radio1"]:checked').val();
+        if(radio1val!=null){
+            var phone_num=$('#phone_num').val();
+            array.push(phone_num);
+            var checkedradio=$('input:radio[name="radio1"]:checked').prop('id');//获取选中的单选框ID
+            array.push(checkedradio);
+            $('input:checkbox[name="checkbox1"]:checked').each(function(){
+                console.log($(this).attr('id'));
+                array.push($(this).attr('id'));
+            });
+            console.log(JSON.stringify(array));
+            var datajson={};
+            datajson.selectValue=JSON.stringify(array);
+            $.ajax({
+                url:ctxPath+'/wuxi/m/projectscore.json',
+                type:'post',
+                data: datajson,
+                dataType:'html',
+                ifModified:true,
+                cache:false,
+                success: function(data){
+                    data = $.parseJSON(data);
+                    var code = data.resultCode;
+                    if(code ==10200){
+                        $.alert("反馈成功!");
+                    }
+                    else
+                    {
+                        $.alert("反馈失败!");
+                    }
+
+
+                }
+            });
+        }else{
+            $.alert("请选择项目后再评分!");
+        }
+    }
+
+
+    function coureScore(){
+        var phone_num=$('#phone_num').val();
+        var radio1val=$('input:radio[name="radio1"]:checked').val();
+        var checkedradio=$('input:radio[name="radio1"]:checked').prop('id');//获取选中的单选框ID
+
+        if(radio1val!=null){
+            window.location.href=ctxPath+'/wuxi/m/coursescore.json?phone_num='+phone_num+'&projectID='+checkedradio;
+        }else{
+            $.alert("请先选择项目!");
+        }
+    }
+</script>
+</body>
+</html>

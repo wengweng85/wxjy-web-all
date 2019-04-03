@@ -37,6 +37,7 @@
     <module>wxjy-parent-1.0.1</module>
     <module>wxjy-parent-1.0.2</module>
     <module>wxjy-parent-1.0.3</module>
+    <module>wxjy-parent-1.0.4</module>
   </modules>
   <!-- 发布命令   mvn deploy -Dmaven.test.skip=true -->
   <!-- nexus私服配置 -->

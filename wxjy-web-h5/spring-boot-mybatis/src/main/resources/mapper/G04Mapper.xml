@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.groupwork.mapper.G04Mapper" >
+
+    <select id="getAll" resultType="com.groupwork.entity.G04" parameterType="java.lang.String">
+        SELECT  G0300,
+           G0400,
+           G0401,
+           G0402,
+           G0403,
+           G0404,
+           DECODE(isconfirm,1,2,isexpired)  G0405,
+           isexpired ,
+           nvl(countnum,0) countnum
+            FROM (
+            select G0300,
+           G0400,
+           G0401,
+           G0402,
+           G0403,
+           G0404,
+           (select count(*) from g07  b where b.G0400=a.G0400 and b.g0100=#{g0100}) isconfirm,
+           G0405,
+           DECODE(SIGN( SYSDATE- (G0405-1/24/2)),1,1,0) isexpired,
+           (SELECT TO_NUMBER(G0701) + TO_NUMBER(G0702) + TO_NUMBER(G0703) +
+                   TO_NUMBER(G0704) + TO_NUMBER(G0705) + TO_NUMBER(G0706) +
+                   TO_NUMBER(G0707) + TO_NUMBER(G0708) + TO_NUMBER(G0709) +
+                   TO_NUMBER(G0710) + TO_NUMBER(G0711) + TO_NUMBER(G0712)
+              FROM g07 b
+              WHERE b.G0400 = a.G0400 and b.g0100=#{g0100}) countnum
+         from G04 a
+         order by G0403 )
+    </select>
+</mapper>

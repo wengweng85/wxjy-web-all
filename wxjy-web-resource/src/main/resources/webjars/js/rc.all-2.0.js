@@ -395,7 +395,7 @@ var rc = {
 		options.success=function(response,textStatus){
 			try{
 				console.debug(response);
-				if(response.syscode==200){
+				if(response.syscode&&response.syscode==200){
 					if(response.success==true){
 						//自定义成功回调函数
 						if(callback){
@@ -404,14 +404,18 @@ var rc = {
 							layer.msg(response.message);
 						}
 					}else{
-                        if(error_callback){
+						if(error_callback){
 							error_callback(response);
 						}else{
 							layer.msg(response.message);
 						}
 					}
 				}else{
-					layer.msg(response.message);
+					if(callback){
+						callback(response);
+					}else{
+						layer.msg(response.message);
+					}
 				}
 			}catch (e) {
 				console.debug(e);

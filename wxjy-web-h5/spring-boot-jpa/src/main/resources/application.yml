@@ -1,0 +1,14 @@
+spring:
+    profiles:
+       active: dev
+    thymeleaf:
+       cache: false
+       mode: LEGACYHTML5
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql: TRACE

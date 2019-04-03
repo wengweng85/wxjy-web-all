@@ -229,8 +229,59 @@ td {
 }
 
 /*边距*/
-.mr-10 {
+.mr-10{
 	margin-right: 10px;
+}
+
+.mr-10{
+	margin-left: 10px;
+}
+
+.mb-10 {
+	margin-bottom: 10px;
+}
+
+.mt-10 {
+	margin-top: 10px;
+}
+.grid-tools-btn{
+	margin-top: -7px;
+}
+form .col-xs-1, .col-sm-1, .col-xs-2, .col-sm-2{
+	padding-left:3px;
+	padding-right:0;
+}
+
+.div-gallery{
+	float: left;
+	position:relative;
+	margin:10px 20px 10px 20px;
+}
+.div-gallery-add{
+	float: left;
+	width:150px;
+	margin:10px 20px 10px 20px;
+}
+.img-preview{
+	width:60px;
+	height:60px;
+}
+.img-preview-tile{
+	width:150px;
+	height:150px;
+	cursor: pointer;
+}
+.div-img-delete{
+	position:absolute;
+	right: -15px;
+	top:-15px;
+	display:none;
+	cursor: pointer;
+}
+
+.input-group-addon {
+    font-size: 5px;
+    padding: 6px;
 }
 
 body.canvas-menu .navbar-static-side, body.fixed-sidebar .navbar-static-side

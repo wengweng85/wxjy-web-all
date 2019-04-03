@@ -1,0 +1,1 @@
+java -cp druid-1.0.16.jar com.alibaba.druid.filter.config.ConfigTools gbjypx > key2.txt

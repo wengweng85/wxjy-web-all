@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta name="format-detection" content="address=no;">
+    <title>身份认证</title>
+    <link rel="stylesheet" th:href="@{/css/weui.min.css}">
+    <link rel="stylesheet" th:href="@{/css/jquery-weui.min.css}">
+</head>
+<style>
+    #main {
+        /*margin-top: 100px;*/
+        /*margin-left: 20px;*/
+        /*margin-right: 20px;*/
+        text-align: center;
+        vertical-align: center;
+    }
+
+    #main .weui-flex {
+        margin: 10px;
+
+    }
+    /*.ypj {*/
+    /*background: #E64340;*/
+    /*}*/
+
+    a.weui-btn.green-btn.weui-btn_disabled.ypj {
+        color: rgb(242,78,32);
+    }
+    /*#main .weui-flex .weui-flex__item {*/
+    /*border: 1px solid black;*/
+    /*}*/
+</style>
+<body>
+<div class="page">
+    <div style='font-size: 20px;
+    color: white;
+    position:fixed;
+    text-align: center;
+    padding-top: 10px;
+    width:100%;
+    background-color: #5cadff;
+    height:40px;
+    z-index: 1000  ;'>
+        无锡市组工系统干部培训班
+    </div>
+<div class="page" style="padding-top: 40px;">
+    <div id="main" class="page__bd page__bd_spacing">
+        <div class="weui-flex">
+            <div style="width: 63%;">
+                <div class="placeholder">培训课程</div>
+            </div>
+            <div style="width: 16%;">
+                <div class="placeholder">老师</div>
+            </div>
+            <div style="width: 21%;">
+                <div class="placeholder">评价</div>
+            </div>
+        </div>
+            <div class="weui-flex" th:each="list:${g04list}">
+                <div style="width: 63%; text-align: left">
+                    <div class="placeholder" th:text="${list.G0401}"></div>
+                </div>
+                <div style="width: 16%;">
+                    <div class="placeholder"><a th:href="@{/teacherinfo?G0400=(${list.G0400})}" th:text="${list.G0404}"></a></div>
+                </div>
+                <div style="width: 21%;">
+                    <div class="placeholder">
+                        <a  th:href="@{/coursescore?G0400=(${list.G0400})}"  class="weui-btn green-btn  weui-btn_mini "  hover-class="green-hover-class">评价</a>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/fastclick.js}"></script>
+<script th:src="@{/js/jquery-weui.min.js}"></script>
+<script type="text/javascript">
+    $(function() {FastClick.attach(document.body);});
+</script>
+</body>
+</html>
